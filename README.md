@@ -1,18 +1,32 @@
 # Vortic
 
-Vortic is a contemporary sports brand front-end concept built as a marketplace plus editorial experience. The current delivery focuses on a responsive home page that connects products, sports categories, guides, community, and a conceptual app layer in a single visual system.
+Vortic is a contemporary sports marketplace front-end concept that blends commerce, editorial structure, and brand ecosystem storytelling in a single responsive experience.
 
-## Current scope
+The current version focuses on a high-fidelity home page for a sports brand with a more premium and human tone than a conventional online store.
 
-- Responsive home page with editorial composition
-- Category navigation for sports modalities
-- Featured product curation
-- Sports guide/content sections
-- Conceptual app support section
-- Community and lifestyle storytelling blocks
-- Catalog and product detail base routes
+## Highlights
 
-## Stack
+- Editorial home page with seven structured sections
+- Responsive layout for desktop, tablet, and mobile
+- Marketplace-oriented product curation
+- Sports categories, guides, community, and conceptual app layer
+- Design tokens ready for future brand color and typography changes
+- Feature-based React project structure for continued growth
+
+## Experience scope
+
+The current front-end includes:
+
+- Hero section with strong brand framing
+- Sports category navigation
+- Featured product showcase
+- Sports guide/editorial section
+- Conceptual app support block
+- Community and lifestyle storytelling section
+- Final call-to-action section
+- Base catalog and product routes
+
+## Tech stack
 
 - React 19
 - TypeScript
@@ -35,19 +49,22 @@ src/
   utils/        Helper utilities
 ```
 
-## Design direction
+## Design approach
 
-This phase intentionally does not lock the final brand identity. Visual decisions are organized through tokens so the palette and typography can be replaced later without rebuilding the layout structure.
+This phase intentionally avoids locking the final brand identity.
 
-Current interface principles:
+The interface is built around replaceable tokens so the final palette, typography, and visual refinements can be changed later without rebuilding the layout system.
 
-- clear visual hierarchy
+Current design principles:
+
+- strong hierarchy
+- clean composition
 - generous spacing
-- editorial composition
-- premium but restrained presentation
-- reusable sections prepared for future evolution
+- editorial rhythm
+- restrained premium feel
+- scalable section architecture
 
-## Available scripts
+## Scripts
 
 ```bash
 npm run dev
@@ -64,18 +81,55 @@ npm install
 npm run dev
 ```
 
-## Build status
+## Production build
 
-Production build is currently passing with:
+The project currently builds successfully with:
 
 ```bash
 npm run build
 ```
 
-## Next evolution
+## Deploy
 
-- expand catalog data and category coverage
-- connect pages to a real data source
-- refine navigation and anchor behavior
+This project is ready for static front-end deployment platforms such as Vercel.
+
+Suggested flow:
+
+```bash
+npm install
+npm run build
+```
+
+Deploy the generated output from `dist/`, or connect the repository directly to a hosting provider that supports Vite projects.
+
+Recommended build settings:
+
+- Build command: `npm run build`
+- Output directory: `dist`
+- Node environment: current LTS
+
+## Roadmap
+
+Short term:
+
+- expand catalog coverage with more products and grouping logic
+- connect home and catalog to a real service/data source
+- improve anchor navigation behavior across routes
 - define final brand palette and typography
-- add tests and deployment workflow
+
+Mid term:
+
+- add filters, search, and category-driven browsing
+- enrich product detail pages
+- add shared state for favorites and cart
+- introduce loading, empty, and error states
+
+Later:
+
+- add tests
+- integrate analytics and performance monitoring
+- prepare deployment pipeline and preview workflow
+
+## Repository status
+
+This repository currently represents a front-end foundation in active evolution, not a finished production marketplace.
