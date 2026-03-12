@@ -14,7 +14,7 @@ export const SectionHeader = styled.div`
   gap: ${({ theme }) => theme.spacing[3]};
   max-width: 42rem;
   padding-left: ${({ theme }) => theme.spacing[4]};
-  border-left: 2px solid ${({ theme }) => theme.colors.primary};
+  border-left: 2px solid ${({ theme }) => theme.colors.lineStrong};
 `;
 
 export const Eyebrow = styled.span`

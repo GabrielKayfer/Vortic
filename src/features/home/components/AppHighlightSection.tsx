@@ -1,29 +1,62 @@
 import styled from 'styled-components';
-import { Container } from '../../../components/ui/Container';
 import { appFeatures } from '../data/homeContent';
-import {
-  Eyebrow,
-  Section,
-  SectionDescription,
-  SectionHeader,
-  SectionInner,
-  SectionTitle
-} from './HomeSection';
+
+const SectionWrap = styled.section`
+  background: transparent;
+`;
+
+const Band = styled.div`
+  width: min(100% - 2rem, 82rem);
+  margin: 0 auto;
+  padding: ${({ theme }) => theme.spacing[8]};
+  border-top: 1px solid ${({ theme }) => theme.colors.lineStrong};
+  border-bottom: 1px solid ${({ theme }) => theme.colors.lineStrong};
+  background:
+    linear-gradient(90deg, ${({ theme }) => theme.colors.primary} 0, ${({ theme }) => theme.colors.primary} 1rem, transparent 1rem),
+    ${({ theme }) => theme.colors.contrastDark};
+  color: ${({ theme }) => theme.colors.surface};
+
+  @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
+    padding: ${({ theme }) => theme.spacing[10]};
+  }
+`;
+
+const Intro = styled.div`
+  display: grid;
+  gap: ${({ theme }) => theme.spacing[3]};
+  max-width: 38rem;
+  padding-left: ${({ theme }) => theme.spacing[4]};
+  border-left: 2px solid ${({ theme }) => theme.colors.secondary};
+  margin-bottom: ${({ theme }) => theme.spacing[6]};
+`;
+
+const Eyebrow = styled.span`
+  color: ${({ theme }) => theme.colors.secondary};
+  font-family: ${({ theme }) => theme.fonts.body};
+  font-size: 0.82rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+`;
+
+const Title = styled.h2`
+  font-size: clamp(2.2rem, 4vw, 3.8rem);
+  line-height: 0.92;
+`;
+
+const Description = styled.p`
+  color: rgba(252, 252, 250, 0.72);
+  font-family: ${({ theme }) => theme.fonts.body};
+  line-height: 1.75;
+`;
 
 const Grid = styled.div`
   display: grid;
-  gap: ${({ theme }) => theme.spacing[6]};
-  padding: ${({ theme }) => theme.spacing[6]};
-  border: 1px solid ${({ theme }) => theme.colors.borderStrong};
-  border-radius: ${({ theme }) => theme.radii.xxl};
-  background:
-    linear-gradient(90deg, rgba(200, 224, 230, 0.92) 0, rgba(196, 223, 230, 0.92) 1rem, transparent 1rem),
-    linear-gradient(180deg, rgba(222, 250, 242, 0.18) 0, rgba(230, 241, 238, 0.18) 1rem, transparent 1rem),
-    ${({ theme }) => theme.colors.surface};
+  gap: ${({ theme }) => theme.spacing[5]};
 
   @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
-    grid-template-columns: minmax(0, 1fr) minmax(20rem, 0.92fr);
-    align-items: center;
+    grid-template-columns: minmax(0, 1fr) minmax(20rem, 0.95fr);
+    align-items: start;
   }
 `;
 
@@ -38,13 +71,12 @@ const FeatureCard = styled.div`
   gap: ${({ theme }) => theme.spacing[4]};
   align-items: start;
   padding: ${({ theme }) => theme.spacing[4]};
-  border: 1px solid ${({ theme }) => theme.colors.border};
-  border-radius: ${({ theme }) => theme.radii.lg};
-  background: rgba(251, 252, 252, 0.86);
+  border: 1px solid rgba(252, 252, 250, 0.18);
+  background: rgba(252, 252, 250, 0.05);
 `;
 
 const FeatureIndex = styled.span`
-  color: ${({ theme }) => theme.colors.textMuted};
+  color: rgba(252, 252, 250, 0.62);
   font-family: ${({ theme }) => theme.fonts.body};
   font-size: 0.8rem;
   font-weight: 600;
@@ -57,9 +89,8 @@ const FeatureIconWrap = styled.div`
   justify-content: center;
   width: 3rem;
   height: 3rem;
-  border: 1px solid rgba(95, 135, 146, 0.24);
-  border-radius: ${({ theme }) => theme.radii.md};
-  background: rgba(95, 135, 146, 0.12);
+  border: 1px solid rgba(252, 252, 250, 0.18);
+  background: rgba(53, 89, 199, 0.24);
 `;
 
 const FeatureIcon = styled.img`
@@ -71,24 +102,21 @@ const FeatureIcon = styled.img`
 const FeatureTitle = styled.h3`
   margin-top: ${({ theme }) => theme.spacing[2]};
   font-family: ${({ theme }) => theme.fonts.body};
-  font-size: 1.06rem;
+  font-size: 1.05rem;
   font-weight: 600;
 `;
 
 const FeatureDescription = styled.p`
-  color: ${({ theme }) => theme.colors.textMuted};
+  color: rgba(252, 252, 250, 0.72);
   font-family: ${({ theme }) => theme.fonts.body};
   line-height: 1.7;
 `;
 
 const Device = styled.div`
-  justify-self: center;
-  width: min(100%, 21rem);
+  justify-self: stretch;
   padding: ${({ theme }) => theme.spacing[4]};
-  border: 1px solid ${({ theme }) => theme.colors.borderStrong};
-  border-radius: ${({ theme }) => theme.radii.xl};
-  background: rgba(251, 252, 252, 0.96);
-  box-shadow: ${({ theme }) => theme.shadows.soft};
+  border: 1px solid rgba(252, 252, 250, 0.18);
+  background: rgba(252, 252, 250, 0.06);
 `;
 
 const DeviceChrome = styled.div`
@@ -100,13 +128,13 @@ const DeviceChrome = styled.div`
 const DeviceNotch = styled.span`
   width: 4.25rem;
   height: 0.34rem;
-  background: ${({ theme }) => theme.colors.borderStrong};
+  background: rgba(252, 252, 250, 0.28);
 `;
 
 const DeviceDot = styled.span`
   width: 0.55rem;
   height: 0.55rem;
-  background: ${({ theme }) => theme.colors.secondary};
+  background: ${({ theme }) => theme.colors.alert};
 `;
 
 const DeviceTop = styled.div`
@@ -116,7 +144,7 @@ const DeviceTop = styled.div`
 `;
 
 const SmallLabel = styled.span`
-  color: ${({ theme }) => theme.colors.textMuted};
+  color: rgba(252, 252, 250, 0.62);
   font-family: ${({ theme }) => theme.fonts.body};
   font-size: 0.82rem;
   font-weight: 600;
@@ -127,14 +155,14 @@ const SmallLabel = styled.span`
 const DeviceMetric = styled.div`
   padding: ${({ theme }) => theme.spacing[4]};
   border-left: 3px solid ${({ theme }) => theme.colors.secondary};
-  background: ${({ theme }) => theme.colors.surfaceEditorial};
+  background: rgba(252, 252, 250, 0.08);
 `;
 
 const MetricValue = styled.strong`
   display: block;
   margin-bottom: ${({ theme }) => theme.spacing[2]};
   font-family: ${({ theme }) => theme.fonts.display};
-  font-size: 2.4rem;
+  font-size: 2.3rem;
 `;
 
 const DeviceList = styled.div`
@@ -148,8 +176,8 @@ const DeviceRow = styled.div`
   justify-content: space-between;
   gap: ${({ theme }) => theme.spacing[4]};
   padding: ${({ theme }) => theme.spacing[3]} ${({ theme }) => theme.spacing[4]};
-  border: 1px solid ${({ theme }) => theme.colors.border};
-  background: ${({ theme }) => theme.colors.surfaceMuted};
+  border: 1px solid rgba(252, 252, 250, 0.16);
+  color: rgba(252, 252, 250, 0.9);
   font-family: ${({ theme }) => theme.fonts.body};
 `;
 
@@ -159,64 +187,60 @@ const DeviceValue = styled.strong`
 
 export function AppHighlightSection() {
   return (
-    <Section id="app">
-      <Container>
-        <SectionInner>
-          <SectionHeader>
-            <Eyebrow>Destaque conceitual do app</Eyebrow>
-            <SectionTitle>Uma extensao natural da marca, nao um produto isolado.</SectionTitle>
-            <SectionDescription>
-              O app entra como camada de continuidade: acompanha treino, organiza
-              descoberta e prepara a interface para servicos futuros sem roubar a
-              narrativa principal da home.
-            </SectionDescription>
-          </SectionHeader>
-          <Grid>
-            <FeatureList>
-              {appFeatures.map((feature, index) => (
-                <FeatureCard key={feature.title}>
-                  <FeatureIconWrap>
-                    <FeatureIcon src={feature.icon} alt="" />
-                  </FeatureIconWrap>
-                  <div>
-                    <FeatureIndex>{String(index + 1).padStart(2, '0')}</FeatureIndex>
-                    <FeatureTitle>{feature.title}</FeatureTitle>
-                    <FeatureDescription>{feature.description}</FeatureDescription>
-                  </div>
-                </FeatureCard>
-              ))}
-            </FeatureList>
-            <Device>
-              <DeviceChrome>
-                <DeviceNotch />
-                <DeviceDot />
-              </DeviceChrome>
-              <DeviceTop>
-                <SmallLabel>Preview conceitual</SmallLabel>
-                <h3>Minha semana esportiva</h3>
-              </DeviceTop>
-              <DeviceMetric>
-                <MetricValue>04</MetricValue>
-                <SmallLabel>blocos ativos entre treino, leitura e compra</SmallLabel>
-              </DeviceMetric>
-              <DeviceList>
-                <DeviceRow>
-                  <span>Treino de corrida</span>
-                  <DeviceValue>07:00</DeviceValue>
-                </DeviceRow>
-                <DeviceRow>
-                  <span>Guia de recuperacao</span>
-                  <DeviceValue>08 min</DeviceValue>
-                </DeviceRow>
-                <DeviceRow>
-                  <span>Reposicao recomendada</span>
-                  <DeviceValue>2 itens</DeviceValue>
-                </DeviceRow>
-              </DeviceList>
-            </Device>
-          </Grid>
-        </SectionInner>
-      </Container>
-    </Section>
+    <SectionWrap id="app">
+      <Band>
+        <Intro>
+          <Eyebrow>Destaque conceitual do app</Eyebrow>
+          <Title>Uma pausa de contraste dentro da narrativa.</Title>
+          <Description>
+            O app entra como camada de continuidade: acompanha treino, organiza descoberta e prepara a interface para servicos futuros sem roubar a narrativa principal da home.
+          </Description>
+        </Intro>
+        <Grid>
+          <FeatureList>
+            {appFeatures.map((feature, index) => (
+              <FeatureCard key={feature.title}>
+                <FeatureIconWrap>
+                  <FeatureIcon src={feature.icon} alt="" />
+                </FeatureIconWrap>
+                <div>
+                  <FeatureIndex>{String(index + 1).padStart(2, '0')}</FeatureIndex>
+                  <FeatureTitle>{feature.title}</FeatureTitle>
+                  <FeatureDescription>{feature.description}</FeatureDescription>
+                </div>
+              </FeatureCard>
+            ))}
+          </FeatureList>
+          <Device>
+            <DeviceChrome>
+              <DeviceNotch />
+              <DeviceDot />
+            </DeviceChrome>
+            <DeviceTop>
+              <SmallLabel>Preview conceitual</SmallLabel>
+              <h3>Minha semana esportiva</h3>
+            </DeviceTop>
+            <DeviceMetric>
+              <MetricValue>04</MetricValue>
+              <SmallLabel>blocos ativos entre treino, leitura e compra</SmallLabel>
+            </DeviceMetric>
+            <DeviceList>
+              <DeviceRow>
+                <span>Treino de corrida</span>
+                <DeviceValue>07:00</DeviceValue>
+              </DeviceRow>
+              <DeviceRow>
+                <span>Guia de recuperacao</span>
+                <DeviceValue>08 min</DeviceValue>
+              </DeviceRow>
+              <DeviceRow>
+                <span>Reposicao recomendada</span>
+                <DeviceValue>2 itens</DeviceValue>
+              </DeviceRow>
+            </DeviceList>
+          </Device>
+        </Grid>
+      </Band>
+    </SectionWrap>
   );
 }

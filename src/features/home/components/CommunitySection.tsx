@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { Container } from '../../../components/ui/Container';
 import { communityCards, heroVisuals } from '../data/homeContent';
 import {
   Eyebrow,
@@ -10,12 +9,17 @@ import {
   SectionTitle
 } from './HomeSection';
 
+const SectionFrame = styled.div`
+  width: min(100% - 2rem, 79rem);
+  margin: 0 auto;
+`;
+
 const Layout = styled.div`
   display: grid;
   gap: ${({ theme }) => theme.spacing[6]};
 
   @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
-    grid-template-columns: minmax(0, 1.12fr) minmax(0, 0.88fr);
+    grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
     align-items: stretch;
   }
 `;
@@ -24,8 +28,8 @@ const MainStory = styled.article`
   position: relative;
   overflow: hidden;
   min-height: 34rem;
-  border: 1px solid ${({ theme }) => theme.colors.borderStrong};
-  border-radius: ${({ theme }) => theme.radii.xl};
+  border-top: 1px solid ${({ theme }) => theme.colors.lineStrong};
+  border-bottom: 1px solid ${({ theme }) => theme.colors.lineStrong};
   background: ${({ theme }) => theme.colors.surface};
 `;
 
@@ -43,8 +47,8 @@ const StoryOverlay = styled.div`
   display: grid;
   gap: ${({ theme }) => theme.spacing[3]};
   padding: ${({ theme }) => theme.spacing[5]};
-  border-top: 1px solid rgba(251, 252, 252, 0.28);
-  background: linear-gradient(90deg, rgba(230, 183, 159, 0.28) 0, rgba(230, 183, 159, 0.28) 0.75rem, rgba(31, 37, 41, 0.76) 0.75rem, rgba(31, 37, 41, 0.76) 100%);
+  border-top: 1px solid rgba(252, 252, 250, 0.28);
+  background: linear-gradient(90deg, ${({ theme }) => theme.colors.alert} 0, ${({ theme }) => theme.colors.alert} 0.75rem, rgba(18, 20, 23, 0.82) 0.75rem, rgba(18, 20, 23, 0.82) 100%);
   color: ${({ theme }) => theme.colors.surface};
 `;
 
@@ -72,16 +76,16 @@ const CommunityCard = styled.article`
   grid-template-columns: 6rem 1fr;
   gap: ${({ theme }) => theme.spacing[4]};
   padding: ${({ theme }) => theme.spacing[4]};
-  border: 1px solid ${({ theme }) => theme.colors.borderStrong};
-  border-radius: ${({ theme }) => theme.radii.xl};
+  border-top: 1px solid ${({ theme }) => theme.colors.lineStrong};
+  border-bottom: 1px solid ${({ theme }) => theme.colors.lineStrong};
   background: ${({ theme }) => theme.colors.surface};
 
   &:first-child {
-    background: linear-gradient(90deg, rgba(230, 183, 159, 0.22) 0, rgba(230, 183, 159, 0.22) 0.6rem, transparent 0.6rem), ${({ theme }) => theme.colors.surface};
+    background: rgba(240, 210, 31, 0.18);
   }
 
   &:nth-child(2) {
-    background: linear-gradient(90deg, rgba(168, 206, 196, 0.22) 0, rgba(168, 206, 196, 0.22) 0.6rem, transparent 0.6rem), ${({ theme }) => theme.colors.surface};
+    background: rgba(53, 89, 199, 0.08);
   }
 `;
 
@@ -119,11 +123,9 @@ const CardDescription = styled.p`
 
 const DetailStrip = styled.div`
   overflow: hidden;
-  border: 1px solid ${({ theme }) => theme.colors.borderStrong};
-  border-radius: ${({ theme }) => theme.radii.xl};
-  background:
-    linear-gradient(180deg, rgba(238, 230, 214, 0.95) 0, rgba(238, 230, 214, 0.95) 0.8rem, transparent 0.8rem),
-    ${({ theme }) => theme.colors.surface};
+  border-top: 1px solid ${({ theme }) => theme.colors.lineStrong};
+  border-bottom: 1px solid ${({ theme }) => theme.colors.lineStrong};
+  background: ${({ theme }) => theme.colors.surfaceAlt};
 `;
 
 const DetailImage = styled.img`
@@ -157,14 +159,13 @@ const DetailText = styled.p`
 export function CommunitySection() {
   return (
     <Section id="comunidade">
-      <Container>
+      <SectionFrame>
         <SectionInner>
           <SectionHeader>
             <Eyebrow>Comunidade e estilo de vida</Eyebrow>
             <SectionTitle>O esporte aparece como cultura de rotina, nao so performance.</SectionTitle>
             <SectionDescription>
-              Esse bloco abre espaco para historias, imagem real e sinais de pertencimento.
-              A marca deixa de parecer vitrine fria e passa a comunicar um modo de viver.
+              Esse bloco abre espaco para historias, imagem real e sinais de pertencimento. A marca deixa de parecer vitrine fria e passa a comunicar um modo de viver.
             </SectionDescription>
           </SectionHeader>
           <Layout>
@@ -174,8 +175,7 @@ export function CommunitySection() {
                 <StoryMeta>Vida esportiva contemporanea</StoryMeta>
                 <strong>Treinar, circular e compartilhar a cidade com outra energia.</strong>
                 <StoryText>
-                  A Vortic pode evoluir este espaco para historias, embaixadores,
-                  eventos ou series editoriais conectadas a cada modalidade.
+                  A Vortic pode evoluir este espaco para historias, embaixadores, eventos ou series editoriais conectadas a cada modalidade.
                 </StoryText>
               </StoryOverlay>
             </MainStory>
@@ -204,7 +204,7 @@ export function CommunitySection() {
             </SideCards>
           </Layout>
         </SectionInner>
-      </Container>
+      </SectionFrame>
     </Section>
   );
 }

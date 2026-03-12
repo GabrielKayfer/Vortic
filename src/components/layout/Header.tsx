@@ -12,8 +12,8 @@ const HeaderWrapper = styled.header`
   top: 0;
   z-index: 20;
   backdrop-filter: blur(18px);
-  background: rgba(245, 248, 250, 0.92);
-  border-bottom: 1px solid ${({ theme }) => theme.colors.borderStrong};
+  background: rgba(243, 246, 248, 0.96);
+  border-bottom: 1px solid ${({ theme }) => theme.colors.lineStrong};
 `;
 
 const HeaderContent = styled(Container)`
@@ -83,7 +83,7 @@ const NavigationLink = styled.a`
 
   &:hover {
     color: ${({ theme }) => theme.colors.text};
-    border-color: ${({ theme }) => theme.colors.border};
+    border-color: ${({ theme }) => theme.colors.lineStrong};
     background: ${({ theme }) => theme.colors.surface};
   }
 `;
@@ -100,19 +100,18 @@ const ActionButton = styled.button`
   justify-content: center;
   width: 2.75rem;
   height: 2.75rem;
-  border: 1px solid ${({ theme }) => theme.colors.borderStrong};
+  border: 1px solid ${({ theme }) => theme.colors.lineStrong};
   border-radius: ${({ theme }) => theme.radii.md};
   background: ${({ theme }) => theme.colors.surface};
   cursor: pointer;
   transition:
     transform 180ms ease,
-    border-color 180ms ease,
-    background-color 180ms ease;
+    background-color 180ms ease,
+    color 180ms ease;
 
   &:hover {
     transform: translateY(-1px);
-    border-color: ${({ theme }) => theme.colors.primary};
-    background: ${({ theme }) => theme.colors.surfaceEditorial};
+    background: ${({ theme }) => theme.colors.secondary};
   }
 `;
 
@@ -120,7 +119,7 @@ const ActionIcon = styled.img`
   width: 1rem;
   height: 1rem;
   object-fit: contain;
-  opacity: 0.88;
+  opacity: 0.9;
 `;
 
 export function Header() {

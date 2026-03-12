@@ -7,7 +7,7 @@ export const Button = styled.button`
   gap: ${({ theme }) => theme.spacing[2]};
   min-height: 48px;
   padding: 0 ${({ theme }) => theme.spacing[5]};
-  border: 1px solid ${({ theme }) => theme.colors.primaryDark};
+  border: 1px solid ${({ theme }) => theme.colors.lineStrong};
   border-radius: ${({ theme }) => theme.radii.lg};
   background: ${({ theme }) => theme.colors.primary};
   color: ${({ theme }) => theme.colors.surface};
@@ -16,7 +16,6 @@ export const Button = styled.button`
   font-weight: 600;
   letter-spacing: 0.01em;
   cursor: pointer;
-  box-shadow: 0 10px 20px rgba(95, 135, 146, 0.16);
   transition:
     transform 180ms ease,
     box-shadow 180ms ease,
@@ -26,6 +25,6 @@ export const Button = styled.button`
   &:hover {
     transform: translateY(-1px);
     background: ${({ theme }) => theme.colors.primaryDark};
-    box-shadow: 0 14px 24px rgba(95, 135, 146, 0.18);
+    box-shadow: 0 14px 24px rgba(40, 58, 143, 0.16);
   }
 `;

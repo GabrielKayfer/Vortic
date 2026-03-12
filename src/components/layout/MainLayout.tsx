@@ -5,9 +5,7 @@ import { Header } from './Header';
 const Shell = styled.div`
   min-height: 100vh;
   background:
-    radial-gradient(circle at top left, rgba(95, 135, 146, 0.1), transparent 28%),
-    radial-gradient(circle at 88% 14%, rgba(205, 170, 90, 0.1), transparent 20%),
-    radial-gradient(circle at 72% 60%, rgba(168, 206, 196, 0.08), transparent 18%),
+    linear-gradient(180deg, rgba(95, 135, 146, 0.05) 0, rgba(95, 135, 146, 0.05) 18rem, transparent 18rem),
     ${({ theme }) => theme.colors.background};
   color: ${({ theme }) => theme.colors.text};
 `;

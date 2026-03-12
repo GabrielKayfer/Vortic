@@ -6,10 +6,8 @@ import type { Product } from '../types';
 
 const Card = styled.article`
   overflow: hidden;
-  border: 1px solid ${({ theme }) => theme.colors.borderStrong};
-  border-radius: ${({ theme }) => theme.radii.xl};
-  background:
-    linear-gradient(180deg, rgba(251, 252, 252, 1) 0, rgba(251, 252, 252, 1) calc(100% - 1px), ${({ theme }) => theme.colors.borderStrong} calc(100% - 1px), ${({ theme }) => theme.colors.borderStrong} 100%);
+  border: 1px solid ${({ theme }) => theme.colors.lineStrong};
+  background: ${({ theme }) => theme.colors.surface};
   transition:
     transform 180ms ease,
     box-shadow 180ms ease,
@@ -18,7 +16,6 @@ const Card = styled.article`
   &:hover {
     transform: translateY(-4px);
     box-shadow: ${({ theme }) => theme.shadows.soft};
-    border-color: ${({ theme }) => theme.colors.primary};
   }
 `;
 
@@ -43,9 +40,9 @@ const Favorite = styled.button`
   justify-content: center;
   width: 2.5rem;
   height: 2.5rem;
-  border: 1px solid ${({ theme }) => theme.colors.borderStrong};
+  border: 1px solid ${({ theme }) => theme.colors.lineStrong};
   border-radius: ${({ theme }) => theme.radii.md};
-  background: rgba(251, 252, 252, 0.9);
+  background: rgba(252, 252, 250, 0.92);
 `;
 
 const FavoriteIcon = styled.img`
@@ -70,8 +67,8 @@ const Category = styled.span`
   display: inline-flex;
   width: fit-content;
   padding: 0.3rem 0.55rem;
-  background: rgba(168, 206, 196, 0.24);
-  color: ${({ theme }) => theme.colors.textMuted};
+  background: rgba(240, 210, 31, 0.26);
+  color: ${({ theme }) => theme.colors.text};
   font-family: ${({ theme }) => theme.fonts.body};
   font-size: 0.76rem;
   font-weight: 600;
@@ -87,7 +84,7 @@ const ProductName = styled.h3`
 `;
 
 const Price = styled.strong`
-  color: ${({ theme }) => theme.colors.secondaryDark};
+  color: ${({ theme }) => theme.colors.primary};
   font-family: ${({ theme }) => theme.fonts.body};
   font-size: 1.08rem;
   font-weight: 600;

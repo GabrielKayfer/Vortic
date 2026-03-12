@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { Container } from '../../../components/ui/Container';
 import { sportsCategories } from '../data/homeContent';
 import {
   Eyebrow,
@@ -11,12 +10,17 @@ import {
   SectionTitle
 } from './HomeSection';
 
+const SectionFrame = styled.div`
+  width: min(100% - 2rem, 80rem);
+  margin: 0 auto;
+`;
+
 const IntroRow = styled.div`
   display: grid;
   gap: ${({ theme }) => theme.spacing[5]};
 
   @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
-    grid-template-columns: minmax(0, 1fr) minmax(18rem, 20rem);
+    grid-template-columns: minmax(0, 1fr) minmax(17rem, 19rem);
     align-items: stretch;
   }
 `;
@@ -25,10 +29,9 @@ const IntroCard = styled.aside`
   display: grid;
   gap: ${({ theme }) => theme.spacing[3]};
   padding: ${({ theme }) => theme.spacing[5]};
-  border: 1px solid ${({ theme }) => theme.colors.borderStrong};
-  border-radius: ${({ theme }) => theme.radii.xl};
+  border: 1px solid ${({ theme }) => theme.colors.lineStrong};
   background:
-    linear-gradient(180deg, rgba(168, 206, 196, 0.24) 0, rgba(168, 206, 196, 0.24) 0.6rem, transparent 0.6rem),
+    linear-gradient(180deg, ${({ theme }) => theme.colors.secondary} 0, ${({ theme }) => theme.colors.secondary} 0.65rem, transparent 0.65rem),
     ${({ theme }) => theme.colors.surface};
 `;
 
@@ -62,8 +65,7 @@ const CategoryCard = styled(Link)`
   display: grid;
   gap: ${({ theme }) => theme.spacing[4]};
   padding: ${({ theme }) => theme.spacing[4]};
-  border: 1px solid ${({ theme }) => theme.colors.borderStrong};
-  border-radius: ${({ theme }) => theme.radii.xl};
+  border: 1px solid ${({ theme }) => theme.colors.lineStrong};
   background: ${({ theme }) => theme.colors.surface};
   transition:
     transform 180ms ease,
@@ -72,28 +74,27 @@ const CategoryCard = styled(Link)`
 
   &:hover {
     transform: translateY(-4px);
-    border-color: ${({ theme }) => theme.colors.primary};
     box-shadow: ${({ theme }) => theme.shadows.soft};
   }
 
   &:nth-child(1) {
-    background: linear-gradient(180deg, rgba(95, 135, 146, 0.14) 0, rgba(95, 135, 146, 0.14) 0.5rem, transparent 0.5rem), ${({ theme }) => theme.colors.surface};
+    background: linear-gradient(180deg, rgba(53, 89, 199, 0.16) 0, rgba(53, 89, 199, 0.16) 0.5rem, transparent 0.5rem), ${({ theme }) => theme.colors.surface};
   }
 
   &:nth-child(2) {
-    background: linear-gradient(180deg, rgba(168, 206, 196, 0.22) 0, rgba(168, 206, 196, 0.22) 0.5rem, transparent 0.5rem), ${({ theme }) => theme.colors.surface};
+    background: linear-gradient(180deg, rgba(240, 210, 31, 0.28) 0, rgba(240, 210, 31, 0.28) 0.5rem, transparent 0.5rem), ${({ theme }) => theme.colors.surface};
   }
 
   &:nth-child(3) {
-    background: linear-gradient(180deg, rgba(205, 170, 90, 0.2) 0, rgba(205, 170, 90, 0.2) 0.5rem, transparent 0.5rem), ${({ theme }) => theme.colors.surface};
+    background: linear-gradient(180deg, rgba(228, 71, 58, 0.18) 0, rgba(228, 71, 58, 0.18) 0.5rem, transparent 0.5rem), ${({ theme }) => theme.colors.surface};
   }
 
   &:nth-child(4) {
-    background: linear-gradient(180deg, rgba(230, 183, 159, 0.2) 0, rgba(230, 183, 159, 0.2) 0.5rem, transparent 0.5rem), ${({ theme }) => theme.colors.surface};
+    background: linear-gradient(180deg, rgba(40, 58, 143, 0.18) 0, rgba(40, 58, 143, 0.18) 0.5rem, transparent 0.5rem), ${({ theme }) => theme.colors.surface};
   }
 
   &:nth-child(5) {
-    background: linear-gradient(180deg, rgba(238, 230, 214, 1) 0, rgba(238, 230, 214, 1) 0.5rem, transparent 0.5rem), ${({ theme }) => theme.colors.surface};
+    background: linear-gradient(180deg, rgba(240, 210, 31, 0.16) 0, rgba(240, 210, 31, 0.16) 0.5rem, transparent 0.5rem), ${({ theme }) => theme.colors.surface};
   }
 `;
 
@@ -115,7 +116,7 @@ const CategoryIndex = styled.span`
 `;
 
 const CategoryHint = styled.span`
-  color: ${({ theme }) => theme.colors.primary};
+  color: ${({ theme }) => theme.colors.alert};
   font-family: ${({ theme }) => theme.fonts.body};
   font-size: 0.8rem;
   font-weight: 600;
@@ -170,7 +171,7 @@ const CategoryLinkText = styled.span`
 `;
 
 const Arrow = styled.span`
-  color: ${({ theme }) => theme.colors.secondary};
+  color: ${({ theme }) => theme.colors.primary};
   font-size: 1rem;
   font-weight: 700;
 `;
@@ -178,23 +179,21 @@ const Arrow = styled.span`
 export function SportsCategoriesSection() {
   return (
     <Section id="modalidades">
-      <Container>
+      <SectionFrame>
         <SectionInner>
           <IntroRow>
             <SectionHeader>
               <Eyebrow>Modalidades esportivas</Eyebrow>
               <SectionTitle>Entradas claras para cada universo de pratica.</SectionTitle>
               <SectionDescription>
-                Cada bloco funciona como porta de entrada para produto, conteudo e
-                rotina. A navegacao fica simples e a marca ganha repertorio.
+                Cada bloco funciona como porta de entrada para produto, conteudo e rotina. A navegacao fica simples e a marca ganha repertorio.
               </SectionDescription>
             </SectionHeader>
             <IntroCard>
               <Eyebrow>Curadoria inicial</Eyebrow>
               <IntroMetric>05</IntroMetric>
               <IntroText>
-                Cada modalidade ja nasce com linguagem propria, mas dentro de um
-                mesmo sistema visual para manter unidade de marca.
+                Cada modalidade ja nasce com linguagem propria, mas dentro de um mesmo sistema visual para manter unidade de marca.
               </IntroText>
             </IntroCard>
           </IntroRow>
@@ -220,7 +219,7 @@ export function SportsCategoriesSection() {
             ))}
           </Grid>
         </SectionInner>
-      </Container>
+      </SectionFrame>
     </Section>
   );
 }

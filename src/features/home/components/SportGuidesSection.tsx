@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { Container } from '../../../components/ui/Container';
 import { guideCards } from '../data/homeContent';
 import {
   Eyebrow,
@@ -10,51 +9,49 @@ import {
   SectionTitle
 } from './HomeSection';
 
+const SectionFrame = styled.div`
+  width: min(100% - 2rem, 75rem);
+  margin: 0 auto;
+`;
+
 const Grid = styled.div`
   display: grid;
   gap: ${({ theme }) => theme.spacing[4]};
 
   @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
-    grid-template-columns: 1.25fr 1fr 1fr;
+    grid-template-columns: 1.3fr 1fr 1fr;
   }
 `;
 
 const GuideCard = styled.article`
   overflow: hidden;
-  border: 1px solid ${({ theme }) => theme.colors.borderStrong};
-  border-radius: ${({ theme }) => theme.radii.xl};
+  border-top: 1px solid ${({ theme }) => theme.colors.lineStrong};
+  border-bottom: 1px solid ${({ theme }) => theme.colors.lineStrong};
   background: ${({ theme }) => theme.colors.surface};
-  transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+  transition: transform 180ms ease, box-shadow 180ms ease;
 
   &:hover {
     transform: translateY(-4px);
     box-shadow: ${({ theme }) => theme.shadows.soft};
-    border-color: ${({ theme }) => theme.colors.primary};
   }
 
   &:first-child {
-    background:
-      linear-gradient(180deg, rgba(238, 230, 214, 0.82) 0, rgba(238, 230, 214, 0.82) 0.75rem, transparent 0.75rem),
-      ${({ theme }) => theme.colors.surface};
+    background: rgba(240, 210, 31, 0.18);
   }
 
   &:nth-child(2) {
-    background:
-      linear-gradient(180deg, rgba(168, 206, 196, 0.22) 0, rgba(168, 206, 196, 0.22) 0.75rem, transparent 0.75rem),
-      ${({ theme }) => theme.colors.surface};
+    background: rgba(53, 89, 199, 0.08);
   }
 
   &:nth-child(3) {
-    background:
-      linear-gradient(180deg, rgba(230, 183, 159, 0.2) 0, rgba(230, 183, 159, 0.2) 0.75rem, transparent 0.75rem),
-      ${({ theme }) => theme.colors.surface};
+    background: rgba(228, 71, 58, 0.08);
   }
 `;
 
 const GuideImageWrap = styled.div`
   overflow: hidden;
   border-bottom: 1px solid ${({ theme }) => theme.colors.border};
-  background: ${({ theme }) => theme.colors.backgroundAlt};
+  background: ${({ theme }) => theme.colors.surfaceAlt};
 `;
 
 const GuideImage = styled.img`
@@ -81,9 +78,8 @@ const SportTag = styled.span`
   align-items: center;
   min-height: 2rem;
   padding: 0 ${({ theme }) => theme.spacing[3]};
-  border: 1px solid ${({ theme }) => theme.colors.border};
-  border-radius: ${({ theme }) => theme.radii.md};
-  background: rgba(168, 206, 196, 0.26);
+  border: 1px solid ${({ theme }) => theme.colors.lineStrong};
+  background: ${({ theme }) => theme.colors.surface};
   font-family: ${({ theme }) => theme.fonts.body};
   font-size: 0.8rem;
   font-weight: 600;
@@ -99,8 +95,8 @@ const MetaText = styled.span`
 `;
 
 const GuideTitle = styled.h3`
-  font-size: 1.38rem;
-  line-height: 1.06;
+  font-size: 1.36rem;
+  line-height: 1.05;
 `;
 
 const GuideDescription = styled.p`
@@ -123,14 +119,13 @@ const GuideAction = styled.a`
 export function SportGuidesSection() {
   return (
     <Section id="guias">
-      <Container>
+      <SectionFrame>
         <SectionInner>
           <SectionHeader>
             <Eyebrow>Conteudo por esporte</Eyebrow>
             <SectionTitle>Guias que conectam descoberta, contexto e compra.</SectionTitle>
             <SectionDescription>
-              O editorial nao aparece como bloco separado do comercio. Ele ajuda a
-              orientar escolha, aprofundar repertorio e sustentar recorrencia.
+              O editorial nao aparece como bloco separado do comercio. Ele ajuda a orientar escolha, aprofundar repertorio e sustentar recorrencia.
             </SectionDescription>
           </SectionHeader>
           <Grid>
@@ -152,7 +147,7 @@ export function SportGuidesSection() {
             ))}
           </Grid>
         </SectionInner>
-      </Container>
+      </SectionFrame>
     </Section>
   );
 }

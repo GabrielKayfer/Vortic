@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { Container } from '../../../components/ui/Container';
 import { ProductGrid } from '../../catalog/components/ProductGrid';
 import { products } from '../../catalog/data/products';
 import { heroVisuals } from '../data/homeContent';
@@ -13,12 +12,26 @@ import {
   SectionTitle
 } from './HomeSection';
 
+const SectionFrame = styled.div`
+  width: min(100% - 2rem, 82rem);
+  margin: 0 auto;
+`;
+
+const SectionPanel = styled.div`
+  display: grid;
+  gap: ${({ theme }) => theme.spacing[6]};
+  padding: ${({ theme }) => theme.spacing[6]};
+  border-top: 1px solid ${({ theme }) => theme.colors.lineStrong};
+  border-bottom: 1px solid ${({ theme }) => theme.colors.lineStrong};
+  background: ${({ theme }) => theme.colors.surface};
+`;
+
 const Layout = styled.div`
   display: grid;
   gap: ${({ theme }) => theme.spacing[6]};
 
   @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
-    grid-template-columns: minmax(0, 1.45fr) minmax(19rem, 0.55fr);
+    grid-template-columns: minmax(0, 1.5fr) minmax(18rem, 0.5fr);
     align-items: start;
   }
 `;
@@ -26,12 +39,8 @@ const Layout = styled.div`
 const EditorialCard = styled.aside`
   display: grid;
   gap: ${({ theme }) => theme.spacing[5]};
-  padding: ${({ theme }) => theme.spacing[6]};
-  border: 1px solid ${({ theme }) => theme.colors.borderStrong};
-  border-radius: ${({ theme }) => theme.radii.xl};
-  background:
-    linear-gradient(90deg, rgba(205, 170, 90, 0.18) 0, rgba(205, 170, 90, 0.18) 0.75rem, transparent 0.75rem),
-    ${({ theme }) => theme.colors.surface};
+  padding-left: ${({ theme }) => theme.spacing[4]};
+  border-left: 3px solid ${({ theme }) => theme.colors.alert};
 
   @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
     position: sticky;
@@ -41,8 +50,8 @@ const EditorialCard = styled.aside`
 
 const EditorialVisual = styled.div`
   overflow: hidden;
-  border: 1px solid ${({ theme }) => theme.colors.border};
-  background: ${({ theme }) => theme.colors.surfaceEditorial};
+  border: 1px solid ${({ theme }) => theme.colors.lineStrong};
+  background: ${({ theme }) => theme.colors.surfaceAlt};
 `;
 
 const EditorialImage = styled.img`
@@ -53,7 +62,7 @@ const EditorialImage = styled.img`
 
 const EditorialTitle = styled.h3`
   font-size: 1.45rem;
-  line-height: 1.08;
+  line-height: 1.06;
 `;
 
 const EditorialText = styled.p`
@@ -70,9 +79,8 @@ const NoteList = styled.div`
 const NoteItem = styled.div`
   display: grid;
   gap: ${({ theme }) => theme.spacing[2]};
-  padding: ${({ theme }) => theme.spacing[3]} 0 0 ${({ theme }) => theme.spacing[3]};
+  padding-top: ${({ theme }) => theme.spacing[3]};
   border-top: 1px solid ${({ theme }) => theme.colors.border};
-  border-left: 2px solid ${({ theme }) => theme.colors.border};
 `;
 
 const NoteTitle = styled.span`
@@ -99,14 +107,13 @@ export function FeaturedProductsSection() {
 
   return (
     <Section id="produtos">
-      <Container>
-        <SectionInner>
+      <SectionFrame>
+        <SectionPanel>
           <SectionHeader>
             <Eyebrow>Produtos em destaque</Eyebrow>
             <SectionTitle>Curadoria que parece selecao, nao excesso de loja.</SectionTitle>
             <SectionDescription>
-              A vitrine principal prioriza poucos itens com leitura clara, categorias
-              fortes e espaco para a marca respirar.
+              A vitrine principal abre a largura da pagina e assume mais folego visual. O objetivo aqui e parecer selecao comercial real, com continuidade e espaco para descoberta.
             </SectionDescription>
           </SectionHeader>
           <Layout>
@@ -118,8 +125,7 @@ export function FeaturedProductsSection() {
               </EditorialVisual>
               <EditorialTitle>Produtos para iniciar ou consolidar uma rotina de treino.</EditorialTitle>
               <EditorialText>
-                Misturamos performance, usabilidade e uma linguagem mais limpa para
-                que cada item entre como parte de um ecossistema maior.
+                Misturamos performance, usabilidade e uma linguagem mais limpa para que cada item entre como parte de um ecossistema maior.
               </EditorialText>
               <NoteList>
                 <NoteItem>
@@ -138,8 +144,8 @@ export function FeaturedProductsSection() {
               <EditorialLink to="/catalogo">Ver catalogo completo</EditorialLink>
             </EditorialCard>
           </Layout>
-        </SectionInner>
-      </Container>
+        </SectionPanel>
+      </SectionFrame>
     </Section>
   );
 }
