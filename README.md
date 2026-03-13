@@ -1,30 +1,50 @@
 # Vortic
 
-Vortic is a contemporary sports marketplace front-end concept that blends commerce, editorial structure, and brand ecosystem storytelling in a single responsive experience.
+Vortic is a contemporary sports storefront concept built as a marketplace with editorial structure, product storytelling, and lightweight shopping flows.
 
-The current version focuses on a high-fidelity home page for a sports brand with a more premium and human tone than a conventional online store.
+The current branch goes beyond a landing page. It now includes a stronger home experience, a more concrete catalog and product detail flow, and initial cart, favorites, and search routes.
 
 ## Highlights
 
-- Editorial home page with seven structured sections
-- Responsive layout for desktop, tablet, and mobile
-- Marketplace-oriented product curation
-- Sports categories, guides, community, and conceptual app layer
-- Design tokens ready for future brand color and typography changes
-- Feature-based React project structure for continued growth
+- Responsive storefront with marketplace plus editorial positioning
+- Home page structured into brand, categories, products, guides, app concept, community, and CTA
+- Expanded catalog and product detail experience with richer product data
+- Initial cart, favorites, and search pages
+- Client-side cart and favorites state persisted with `localStorage`
+- Feature-based React architecture with shared hooks and route helpers
+- Design tokens ready for future identity refinement
 
-## Experience scope
+## Current experience
 
-The current front-end includes:
+The front-end currently includes:
 
-- Hero section with strong brand framing
-- Sports category navigation
-- Featured product showcase
-- Sports guide/editorial section
-- Conceptual app support block
-- Community and lifestyle storytelling section
-- Final call-to-action section
-- Base catalog and product routes
+- Home page with stronger product and brand narrative
+- Catalog page with active shelf presentation and editorial sidebar
+- Product detail page with specs, contextual notes, and related items
+- Favorites page
+- Cart page
+- Search page
+- Global header and footer
+- Hash-based section navigation for home sections
+
+## Routes
+
+- `/` home
+- `/catalogo` catalog
+- `/produto/:slug` product detail
+- `/favoritos` favorites
+- `/carrinho` cart
+- `/buscar` search
+
+## State and interaction
+
+Current interactive behavior includes:
+
+- favorites persisted in browser storage
+- cart persisted in browser storage
+- quantity and subtotal handling in cart context
+- product-to-cart and product-to-favorites mapping
+- route-aware hash navigation for home sections
 
 ## Tech stack
 
@@ -38,31 +58,33 @@ The current front-end includes:
 
 ```text
 src/
-  app/          App providers and routing
-  assets/       Local images and symbols used by the interface
-  components/   Shared layout and UI primitives
-  features/     Feature-based sections such as home and catalog
-  pages/        Route-level pages
-  services/     Service abstraction for future data integration
-  styles/       Theme, tokens, and global styles
-  types/        Shared types
-  utils/        Helper utilities
+  app/                Providers, route config, route helpers, app hooks
+  assets/             Product, category, symbol, and brand images
+  components/         Shared layout and UI primitives
+  features/
+    cart/             Cart context, hooks, and types
+    catalog/          Product data, hooks, utils, and UI
+    favorites/        Favorites context, hooks, and types
+    home/             Home sections and content
+  pages/              Route-level pages
+  shared/             Shared hooks and storage utilities
+  styles/             Theme, tokens, and global styles
+  types/              Shared app-level types
+  utils/              Generic helpers
 ```
 
 ## Design approach
 
-This phase intentionally avoids locking the final brand identity.
-
-The interface is built around replaceable tokens so the final palette, typography, and visual refinements can be changed later without rebuilding the layout system.
+The visual system is still token-driven and intentionally flexible. Final brand palette and typography can still evolve without forcing a layout rewrite.
 
 Current design principles:
 
 - strong hierarchy
-- clean composition
-- generous spacing
+- cleaner product framing
 - editorial rhythm
-- restrained premium feel
-- scalable section architecture
+- premium but restrained presentation
+- clearer sense of brand ownership
+- scalable section composition
 
 ## Scripts
 
@@ -83,7 +105,7 @@ npm run dev
 
 ## Production build
 
-The project currently builds successfully with:
+The current branch builds successfully with:
 
 ```bash
 npm run build
@@ -91,45 +113,36 @@ npm run build
 
 ## Deploy
 
-This project is ready for static front-end deployment platforms such as Vercel.
+This project is ready for static deployment platforms such as Vercel.
 
-Suggested flow:
-
-```bash
-npm install
-npm run build
-```
-
-Deploy the generated output from `dist/`, or connect the repository directly to a hosting provider that supports Vite projects.
-
-Recommended build settings:
+Recommended settings:
 
 - Build command: `npm run build`
 - Output directory: `dist`
-- Node environment: current LTS
+- Node version: current LTS
 
 ## Roadmap
 
 Short term:
 
-- expand catalog coverage with more products and grouping logic
-- connect home and catalog to a real service/data source
-- improve anchor navigation behavior across routes
-- define final brand palette and typography
+- make catalog filters fully functional
+- improve search behavior and query handling
+- connect the storefront to a real data source
+- refine asset optimization and image weight
 
 Mid term:
 
-- add filters, search, and category-driven browsing
-- enrich product detail pages
-- add shared state for favorites and cart
-- introduce loading, empty, and error states
+- expand cart and favorites flows
+- add product variants and stock-aware behavior
+- improve empty, loading, and error states
+- define final brand palette and typography
 
 Later:
 
 - add tests
-- integrate analytics and performance monitoring
-- prepare deployment pipeline and preview workflow
+- add analytics and monitoring
+- prepare a stronger deployment and preview workflow
 
 ## Repository status
 
-This repository currently represents a front-end foundation in active evolution, not a finished production marketplace.
+This repository now represents an expanded storefront foundation with early product interactions, not just a visual concept page. It is still evolving and is not yet a finished production commerce system.
