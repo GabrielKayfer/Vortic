@@ -1,5 +1,7 @@
-import { Link } from 'react-router-dom';
+﻿import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { getHomeSectionPath } from '../../../app/routes/paths';
+import { HOME_SECTION_IDS } from '../../../app/routes/sections';
 import { Button } from '../../../components/ui/Button';
 import { Section } from './HomeSection';
 
@@ -78,10 +80,10 @@ const SecondaryLink = styled(Link)`
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 48px;
-  padding: 0 ${({ theme }) => theme.spacing[5]};
+  min-height: 44px;
+  padding: 0 ${({ theme }) => theme.spacing[4]};
   border: 1px solid ${({ theme }) => theme.colors.lineStrong};
-  border-radius: ${({ theme }) => theme.radii.lg};
+  border-radius: ${({ theme }) => theme.radii.sm};
   background: ${({ theme }) => theme.colors.surfaceAlt};
   font-family: ${({ theme }) => theme.fonts.body};
   font-weight: 600;
@@ -97,25 +99,31 @@ export function FinalCtaSection() {
       <SectionFrame>
         <CtaPanel>
           <Copy>
-            <Label>Chamada final</Label>
-            <Title>Uma base pronta para evoluir em marketplace, editorial e servicos.</Title>
+            <Label>Siga por aqui</Label>
+            <Title>Entre na modalidade, veja o repertório e leve o que faz sentido agora.</Title>
             <Description>
-              A home ja sai com hierarquia, respiro e secoes pensadas para receber backend, personalizacao, novos produtos e novas narrativas sem perder coerencia.
+              No catálogo, cada peça aparece com contexto de uso: o essencial de corrida,
+              quadra, piscina e treino, com informação suficiente para comparar sem pressa.
             </Description>
             <MetaList>
-              <MetaItem>Tokens centralizados</MetaItem>
-              <MetaItem>Secoes componentizadas</MetaItem>
-              <MetaItem>Base pronta para integracao</MetaItem>
+              <MetaItem>05 modalidades principais</MetaItem>
+              <MetaItem>06 destaques na home</MetaItem>
+              <MetaItem>08 itens no catálogo</MetaItem>
             </MetaList>
           </Copy>
           <Actions>
             <Link to="/catalogo">
-              <Button as="span">Entrar no catalogo</Button>
+              <Button as="span">Ver repertório completo</Button>
             </Link>
-            <SecondaryLink to="/#app">Ver conceito do app</SecondaryLink>
+            <SecondaryLink to={getHomeSectionPath(HOME_SECTION_IDS.app)}>Ver o app por dentro</SecondaryLink>
           </Actions>
         </CtaPanel>
       </SectionFrame>
     </Section>
   );
 }
+
+
+
+
+

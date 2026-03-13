@@ -1,4 +1,5 @@
-import styled from 'styled-components';
+﻿import styled from 'styled-components';
+import { HOME_SECTION_IDS } from '../../../app/routes/sections';
 import { appFeatures } from '../data/homeContent';
 
 const SectionWrap = styled.section`
@@ -187,13 +188,14 @@ const DeviceValue = styled.strong`
 
 export function AppHighlightSection() {
   return (
-    <SectionWrap id="app">
+    <SectionWrap id={HOME_SECTION_IDS.app}>
       <Band>
         <Intro>
-          <Eyebrow>Destaque conceitual do app</Eyebrow>
-          <Title>Uma pausa de contraste dentro da narrativa.</Title>
+          <Eyebrow>App Vortic</Eyebrow>
+          <Title>O app acompanha treino, meta e o que pede reposição.</Title>
           <Description>
-            O app entra como camada de continuidade: acompanha treino, organiza descoberta e prepara a interface para servicos futuros sem roubar a narrativa principal da home.
+            Ele funciona como continuação simples da rotina: organiza sessões, resume
+            ritmo e lembra quando um item volta a fazer falta.
           </Description>
         </Intro>
         <Grid>
@@ -217,25 +219,25 @@ export function AppHighlightSection() {
               <DeviceDot />
             </DeviceChrome>
             <DeviceTop>
-              <SmallLabel>Preview conceitual</SmallLabel>
-              <h3>Minha semana esportiva</h3>
+              <SmallLabel>Painel da semana</SmallLabel>
+              <h3>Minha semana Vortic</h3>
             </DeviceTop>
             <DeviceMetric>
-              <MetricValue>04</MetricValue>
-              <SmallLabel>blocos ativos entre treino, leitura e compra</SmallLabel>
+              <MetricValue>4/5</MetricValue>
+              <SmallLabel>sessões previstas concluídas</SmallLabel>
             </DeviceMetric>
             <DeviceList>
               <DeviceRow>
-                <span>Treino de corrida</span>
-                <DeviceValue>07:00</DeviceValue>
+                <span>Corrida de base</span>
+                <DeviceValue>42 min</DeviceValue>
               </DeviceRow>
               <DeviceRow>
-                <span>Guia de recuperacao</span>
-                <DeviceValue>08 min</DeviceValue>
+                <span>Pedal de sábado</span>
+                <DeviceValue>Confirmado</DeviceValue>
               </DeviceRow>
               <DeviceRow>
-                <span>Reposicao recomendada</span>
-                <DeviceValue>2 itens</DeviceValue>
+                <span>Kit de piscina</span>
+                <DeviceValue>Rever compra</DeviceValue>
               </DeviceRow>
             </DeviceList>
           </Device>
@@ -244,3 +246,6 @@ export function AppHighlightSection() {
     </SectionWrap>
   );
 }
+
+
+

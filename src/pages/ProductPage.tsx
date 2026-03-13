@@ -1,10 +1,16 @@
 import { Link, useParams } from 'react-router-dom';
 import styled from 'styled-components';
+import { getCatalogPath } from '../app/routes/paths';
 import { Button } from '../components/ui/Button';
 import { Container } from '../components/ui/Container';
+import { useCart } from '../features/cart/hooks/useCart';
 import { ProductGrid } from '../features/catalog/components/ProductGrid';
 import { productEditorialBySlug } from '../features/catalog/data/editorialContent';
-import { products } from '../features/catalog/data/products';
+import { useProductBySlug } from '../features/catalog/hooks/useProductBySlug';
+import { useRelatedProducts } from '../features/catalog/hooks/useRelatedProducts';
+import { formatCategoryLabel } from '../features/catalog/utils/formatCategoryLabel';
+import { getProductImageBackground } from '../features/catalog/utils/getProductImageBackground';
+import { useFavorites } from '../features/favorites/hooks/useFavorites';
 import { formatCurrency } from '../utils/formatCurrency';
 import deliveryIcon from '../assets/images/symbols/delivery.png';
 import favoriteIcon from '../assets/images/symbols/favorite.png';
@@ -19,7 +25,7 @@ const Page = styled(Container)`
 const BackLink = styled(Link)`
   color: ${({ theme }) => theme.colors.primary};
   font-family: ${({ theme }) => theme.fonts.body};
-  font-size: 0.95rem;
+  font-size: 0.92rem;
   font-weight: 600;
 `;
 
@@ -47,19 +53,18 @@ const MediaColumn = styled.div`
   gap: ${({ theme }) => theme.spacing[4]};
 `;
 
-const MainFrame = styled.div`
+const MainFrame = styled.div<{ $tone: string }>`
   overflow: hidden;
   border: 1px solid ${({ theme }) => theme.colors.border};
   border-radius: ${({ theme }) => theme.radii.xxl};
-  background:
-    linear-gradient(180deg, rgba(238, 230, 214, 0.76), transparent 22%),
-    ${({ theme }) => theme.colors.surface};
+  background: ${({ $tone }) => $tone};
 `;
 
 const MainImage = styled.img`
   width: 100%;
   aspect-ratio: 1 / 0.92;
   object-fit: cover;
+  background: transparent;
 `;
 
 const MediaGrid = styled.div`
@@ -87,7 +92,7 @@ const SupportImage = styled.img`
 
 const SupportBody = styled.div`
   display: grid;
-  gap: ${({ theme }) => theme.spacing[2]};
+  gap: ${({ theme }) => theme.spacing[3]};
   padding: ${({ theme }) => theme.spacing[4]};
 `;
 
@@ -111,18 +116,25 @@ const HighlightList = styled.div`
 
 const HighlightCard = styled.div`
   display: grid;
-  gap: ${({ theme }) => theme.spacing[2]};
+  gap: ${({ theme }) => theme.spacing[3]};
+  min-height: 6.25rem;
+  align-content: center;
+  justify-items: center;
   padding: ${({ theme }) => theme.spacing[4]};
   border: 1px solid ${({ theme }) => theme.colors.border};
   border-radius: ${({ theme }) => theme.radii.xl};
   background: ${({ theme }) => theme.colors.surfaceSupport};
+  text-align: center;
 `;
 
 const HighlightTag = styled.span`
+  display: block;
+  max-width: 14ch;
   color: ${({ theme }) => theme.colors.text};
   font-family: ${({ theme }) => theme.fonts.body};
   font-size: 0.9rem;
   font-weight: 600;
+  line-height: 1.45;
 `;
 
 const Panel = styled.div`
@@ -155,7 +167,7 @@ const CategoryBadge = styled.span`
   min-height: 2.15rem;
   width: fit-content;
   padding: 0 ${({ theme }) => theme.spacing[3]};
-  border-radius: ${({ theme }) => theme.radii.pill};
+  border-radius: ${({ theme }) => theme.radii.md};
   background: rgba(168, 206, 196, 0.24);
   font-family: ${({ theme }) => theme.fonts.body};
   font-size: 0.84rem;
@@ -191,7 +203,7 @@ const Tag = styled.span`
   min-height: 2.15rem;
   padding: 0 ${({ theme }) => theme.spacing[3]};
   border: 1px solid ${({ theme }) => theme.colors.border};
-  border-radius: ${({ theme }) => theme.radii.pill};
+  border-radius: ${({ theme }) => theme.radii.md};
   background: rgba(251, 252, 252, 0.82);
   font-family: ${({ theme }) => theme.fonts.body};
   font-size: 0.85rem;
@@ -201,28 +213,48 @@ const Tag = styled.span`
 const ActionRow = styled.div`
   display: flex;
   flex-wrap: wrap;
+  align-items: stretch;
   gap: ${({ theme }) => theme.spacing[4]};
+
+  > * {
+    flex: 1 1 14rem;
+  }
 `;
 
-const SecondaryAction = styled.button`
-  display: inline-flex;
+const SecondaryAction = styled.button<{ $active?: boolean }>`
+  display: inline-grid;
+  grid-template-columns: 1rem minmax(0, auto) 1rem;
   align-items: center;
   justify-content: center;
   gap: ${({ theme }) => theme.spacing[2]};
-  min-height: 48px;
-  padding: 0 ${({ theme }) => theme.spacing[5]};
-  border: 1px solid ${({ theme }) => theme.colors.borderStrong};
-  border-radius: ${({ theme }) => theme.radii.pill};
-  background: rgba(251, 252, 252, 0.78);
+  min-height: 44px;
+  padding: 0 ${({ theme }) => theme.spacing[4]};
+  border: 1px solid ${({ theme, $active }) => ($active ? theme.colors.alert : theme.colors.borderStrong)};
+  border-radius: ${({ theme }) => theme.radii.md};
+  background: ${({ $active }) => ($active ? 'rgba(228, 71, 58, 0.1)' : 'rgba(251, 252, 252, 0.78)')};
   font-family: ${({ theme }) => theme.fonts.body};
-  font-size: 0.95rem;
+  font-size: 0.92rem;
   font-weight: 600;
+  text-align: center;
+  cursor: pointer;
+
+  &::after {
+    content: '';
+    width: 1rem;
+    height: 1rem;
+  }
 `;
 
 const ActionIcon = styled.img`
+  grid-column: 1;
   width: 1rem;
   height: 1rem;
   object-fit: contain;
+`;
+
+const ActionText = styled.span`
+  grid-column: 2;
+  white-space: nowrap;
 `;
 
 const ServiceGrid = styled.div`
@@ -252,7 +284,7 @@ const ServiceText = styled.div`
 
 const ServiceTitle = styled.span`
   font-family: ${({ theme }) => theme.fonts.body};
-  font-size: 0.95rem;
+  font-size: 0.92rem;
   font-weight: 600;
 `;
 
@@ -318,7 +350,7 @@ const SpecLabel = styled.span`
 const SpecValue = styled.span`
   text-align: right;
   font-family: ${({ theme }) => theme.fonts.body};
-  font-size: 0.95rem;
+  font-size: 0.92rem;
   font-weight: 600;
 `;
 
@@ -352,38 +384,39 @@ const RecommendationText = styled.p`
 
 export function ProductPage() {
   const { slug } = useParams();
-  const product = products.find((item) => item.slug === slug);
+  const product = useProductBySlug(slug);
+  const relatedProducts = useRelatedProducts(product, 3);
+  const { addItem } = useCart();
+  const { has, toggle } = useFavorites();
 
   if (!product) {
     return (
       <Page>
-        <BackLink to="/catalogo">Voltar ao catalogo</BackLink>
+        <BackLink to={getCatalogPath()}>Voltar ao catálogo</BackLink>
         <EmptyState>
-          <Eyebrow>Produto nao encontrado</Eyebrow>
-          <h1>Este item ainda nao existe na selecao atual.</h1>
+          <Eyebrow>Item fora da seleção atual</Eyebrow>
+          <h1>Este produto não está disponível neste momento.</h1>
           <Description>
-            Quando a base receber dados reais, esta pagina pode evoluir para fallback de busca,
-            sugestoes relacionadas e redirecionamento inteligente.
+            Volte ao catálogo para seguir por modalidade, faixa de preço ou tipo
+            de uso. A seleção ativa continua organizada para facilitar comparação
+            e recompra.
           </Description>
-          <BackLink to="/catalogo">Explorar catalogo</BackLink>
+          <BackLink to={getCatalogPath()}>Explorar catálogo</BackLink>
         </EmptyState>
       </Page>
     );
   }
 
   const editorial = productEditorialBySlug[product.slug as keyof typeof productEditorialBySlug];
-  const relatedProducts = products
-    .filter((item) => item.slug !== product.slug && item.category === product.category)
-    .concat(products.filter((item) => item.slug !== product.slug && item.category !== product.category))
-    .slice(0, 3);
+  const isFavorite = has(product.id) || has(product.slug);
 
   return (
     <Page>
-      <BackLink to="/catalogo">Voltar ao catalogo</BackLink>
+      <BackLink to={getCatalogPath()}>Voltar ao catálogo</BackLink>
 
       <Hero>
         <MediaColumn>
-          <MainFrame>
+          <MainFrame $tone={getProductImageBackground(product.category, product.image)}>
             <MainImage src={product.image} alt={product.name} />
           </MainFrame>
           <MediaGrid>
@@ -406,35 +439,37 @@ export function ProductPage() {
 
         <Panel>
           <Eyebrow>{editorial.overline}</Eyebrow>
-          <CategoryBadge>{product.category}</CategoryBadge>
+          <CategoryBadge>{formatCategoryLabel(product.category)}</CategoryBadge>
           <Title>{product.name}</Title>
           <Price>{formatCurrency(product.price)}</Price>
           <Description>{editorial.description}</Description>
           <TagRow>
+            <Tag>{product.badge}</Tag>
+            {product.attributes.map((attribute) => (
+              <Tag key={attribute}>{attribute}</Tag>
+            ))}
             <Tag>Curadoria Vortic</Tag>
-            <Tag>Marketplace editorial</Tag>
-            <Tag>Preparado para dados reais</Tag>
           </TagRow>
           <ActionRow>
-            <Button type="button">Adicionar ao carrinho</Button>
-            <SecondaryAction type="button">
+            <Button type="button" onClick={() => addItem(product)}>Adicionar ao carrinho</Button>
+            <SecondaryAction type="button" $active={isFavorite} onClick={() => toggle(product)}>
               <ActionIcon src={favoriteIcon} alt="" />
-              Salvar item
+              <ActionText>{isFavorite ? 'Remover dos favoritos' : 'Salvar nos favoritos'}</ActionText>
             </SecondaryAction>
           </ActionRow>
           <ServiceGrid>
             <ServiceCard>
               <ActionIcon src={deliveryIcon} alt="" />
               <ServiceText>
-                <ServiceTitle>Fluxo pronto para entrega</ServiceTitle>
-                <ServiceDescription>O bloco ja acomoda frete, prazo e estoque quando a integracao entrar.</ServiceDescription>
+                <ServiceTitle>Envio com rastreio</ServiceTitle>
+                <ServiceDescription>Prazo calculado no checkout com atualização por e-mail ao longo da entrega.</ServiceDescription>
               </ServiceText>
             </ServiceCard>
             <ServiceCard>
               <ActionIcon src={priceTagIcon} alt="" />
               <ServiceText>
-                <ServiceTitle>Preco com contexto</ServiceTitle>
-                <ServiceDescription>A pagina combina compra, narrativa e suporte de decisao sem parecer promocional.</ServiceDescription>
+                <ServiceTitle>Troca em até 30 dias</ServiceTitle>
+                <ServiceDescription>Mudança de tamanho, cor ou volume com suporte simples pelo atendimento.</ServiceDescription>
               </ServiceText>
             </ServiceCard>
           </ServiceGrid>
@@ -443,8 +478,8 @@ export function ProductPage() {
 
       <DetailLayout>
         <DetailCard>
-          <Eyebrow>Leitura do produto</Eyebrow>
-          <DetailTitle>Como este item entra no ecossistema da marca.</DetailTitle>
+          <Eyebrow>Como entra na rotina</Eyebrow>
+          <DetailTitle>Onde este item funciona melhor no ritmo da semana.</DetailTitle>
           <DetailText>
             {editorial.notes[0]} {editorial.notes[1]}
           </DetailText>
@@ -456,8 +491,8 @@ export function ProductPage() {
         </DetailCard>
 
         <DetailCard $tone="editorial">
-          <Eyebrow>Especificacoes curadas</Eyebrow>
-          <DetailTitle>Resumo tecnico com linguagem clara.</DetailTitle>
+          <Eyebrow>Ficha rápida</Eyebrow>
+          <DetailTitle>Informações objetivas para decidir sem excesso de ficha técnica.</DetailTitle>
           <SpecGrid>
             {editorial.specs.map((spec) => (
               <SpecRow key={spec.label}>
@@ -471,10 +506,12 @@ export function ProductPage() {
 
       <RecommendationSection>
         <RecommendationHeader>
-          <Eyebrow>Produtos relacionados</Eyebrow>
-          <DetailTitle>Outras entradas coerentes com a mesma leitura de marca.</DetailTitle>
+          <Eyebrow>Continue a seleção</Eyebrow>
+          <DetailTitle>Mais itens que fazem sentido no mesmo contexto de uso.</DetailTitle>
           <RecommendationText>
-            Abaixo, a pagina continua a jornada sem quebrar o clima editorial. As sugestoes podem evoluir depois para recomendacao por categoria, historico ou comportamento real.
+            Se a compra começou por corrida, quadra, piscina ou deslocamento,
+            vale comparar com outras opções do mesmo universo ou completar o
+            conjunto com um item de apoio.
           </RecommendationText>
         </RecommendationHeader>
         <ProductGrid products={relatedProducts} />

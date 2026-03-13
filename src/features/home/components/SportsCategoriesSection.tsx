@@ -1,13 +1,14 @@
-import { Link } from 'react-router-dom';
+﻿import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { sportsCategories } from '../data/homeContent';
+import { HOME_SECTION_IDS } from '../../../app/routes/sections';
+import { sportsCategories, sportsEditorialFeature } from '../data/homeContent';
 import {
   Eyebrow,
   Section,
   SectionDescription,
   SectionHeader,
   SectionInner,
-  SectionTitle
+  SectionTitle,
 } from './HomeSection';
 
 const SectionFrame = styled.div`
@@ -35,11 +36,6 @@ const IntroCard = styled.aside`
     ${({ theme }) => theme.colors.surface};
 `;
 
-const IntroMetric = styled.strong`
-  font-family: ${({ theme }) => theme.fonts.display};
-  font-size: 3rem;
-  line-height: 0.88;
-`;
 
 const IntroText = styled.p`
   color: ${({ theme }) => theme.colors.textMuted};
@@ -98,35 +94,10 @@ const CategoryCard = styled(Link)`
   }
 `;
 
-const CategoryTop = styled.div`
-  display: flex;
-  justify-content: space-between;
-  gap: ${({ theme }) => theme.spacing[3]};
-  align-items: center;
-  padding-bottom: ${({ theme }) => theme.spacing[3]};
-  border-bottom: 1px solid ${({ theme }) => theme.colors.border};
-`;
-
-const CategoryIndex = styled.span`
-  color: ${({ theme }) => theme.colors.textMuted};
-  font-family: ${({ theme }) => theme.fonts.body};
-  font-size: 0.78rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-`;
-
-const CategoryHint = styled.span`
-  color: ${({ theme }) => theme.colors.alert};
-  font-family: ${({ theme }) => theme.fonts.body};
-  font-size: 0.8rem;
-  font-weight: 600;
-  text-transform: uppercase;
-`;
-
 const CategoryMedia = styled.div`
   overflow: hidden;
   border: 1px solid ${({ theme }) => theme.colors.border};
-  background: ${({ theme }) => theme.colors.backgroundAlt};
+  background: ${({ theme }) => theme.colors.surface};
 `;
 
 const CategoryImage = styled.img`
@@ -154,56 +125,107 @@ const CategoryDescription = styled.p`
   line-height: 1.7;
 `;
 
-const CategoryFooter = styled.div`
-  display: flex;
-  justify-content: space-between;
+
+const EditorialBand = styled.article`
+  display: grid;
+  gap: ${({ theme }) => theme.spacing[4]};
+  margin-top: ${({ theme }) => theme.spacing[6]};
+
+  @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
+    grid-template-columns: minmax(0, 1.2fr) minmax(18rem, 0.8fr);
+    align-items: stretch;
+  }
+`;
+
+const EditorialLead = styled.div`
+  overflow: hidden;
+  border: 1px solid ${({ theme }) => theme.colors.lineStrong};
+  background: linear-gradient(180deg, rgba(53, 89, 199, 0.08) 0%, rgba(240, 210, 31, 0.12) 100%), ${({ theme }) => theme.colors.surface};
+`;
+
+const EditorialLeadImage = styled.img`
+  width: 100%;
+  height: 100%;
+  min-height: 22rem;
+  object-fit: cover;
+`;
+
+const EditorialSide = styled.div`
+  display: grid;
+  gap: ${({ theme }) => theme.spacing[4]};
+  padding: ${({ theme }) => theme.spacing[5]};
+  border: 1px solid ${({ theme }) => theme.colors.lineStrong};
+  background:
+    linear-gradient(180deg, rgba(228, 71, 58, 0.12) 0%, rgba(252, 252, 250, 0) 1.1rem),
+    ${({ theme }) => theme.colors.surface};
+`;
+
+const EditorialPortraitWrap = styled.div`
+  overflow: hidden;
+  border: 1px solid ${({ theme }) => theme.colors.border};
+  background: linear-gradient(180deg, rgba(40, 58, 143, 0.12) 0%, rgba(238, 242, 245, 0.9) 100%), ${({ theme }) => theme.colors.backgroundAlt};
+`;
+
+const EditorialPortrait = styled.img`
+  width: 100%;
+  aspect-ratio: 1 / 1.08;
+  object-fit: cover;
+`;
+
+const EditorialCopy = styled.div`
+  display: grid;
   gap: ${({ theme }) => theme.spacing[3]};
-  align-items: center;
+`;
+
+const EditorialTitle = styled.h3`
+  font-size: clamp(1.7rem, 2.6vw, 2.4rem);
+  line-height: 0.98;
+`;
+
+const EditorialText = styled.p`
+  color: ${({ theme }) => theme.colors.textMuted};
+  font-family: ${({ theme }) => theme.fonts.body};
+  line-height: 1.75;
+`;
+
+const EditorialNote = styled.p`
   padding-top: ${({ theme }) => theme.spacing[3]};
   border-top: 1px solid ${({ theme }) => theme.colors.border};
-`;
-
-const CategoryLinkText = styled.span`
   color: ${({ theme }) => theme.colors.text};
   font-family: ${({ theme }) => theme.fonts.body};
-  font-size: 0.9rem;
-  font-weight: 600;
-`;
-
-const Arrow = styled.span`
-  color: ${({ theme }) => theme.colors.primary};
-  font-size: 1rem;
-  font-weight: 700;
+  font-size: 0.95rem;
+  font-weight: 500;
+  line-height: 1.7;
 `;
 
 export function SportsCategoriesSection() {
   return (
-    <Section id="modalidades">
+    <Section id={HOME_SECTION_IDS.categories}>
       <SectionFrame>
         <SectionInner>
           <IntroRow>
             <SectionHeader>
-              <Eyebrow>Modalidades esportivas</Eyebrow>
-              <SectionTitle>Entradas claras para cada universo de pratica.</SectionTitle>
+              <Eyebrow>Modalidades</Eyebrow>
+              <SectionTitle>Cinco modalidades para começar pelo esporte que já faz parte da sua semana.</SectionTitle>
               <SectionDescription>
-                Cada bloco funciona como porta de entrada para produto, conteudo e rotina. A navegacao fica simples e a marca ganha repertorio.
+                Corrida, ciclismo, futebol, natação e tênis concentram os
+                principais universos da Vortic. Basquete, treino e acessórios
+                seguem ao redor deles, como complemento de uso, reposição e
+                deslocamento.
               </SectionDescription>
             </SectionHeader>
             <IntroCard>
-              <Eyebrow>Curadoria inicial</Eyebrow>
-              <IntroMetric>05</IntroMetric>
+              <Eyebrow>Primeiro recorte</Eyebrow>
               <IntroText>
-                Cada modalidade ja nasce com linguagem propria, mas dentro de um mesmo sistema visual para manter unidade de marca.
+                Comece pela modalidade que já faz parte da sua semana. A partir
+                daí, a seleção fica mais direta: o que vestir, o que levar e o
+                que vale comparar primeiro.
               </IntroText>
             </IntroCard>
           </IntroRow>
           <Grid>
-            {sportsCategories.map((category, index) => (
+            {sportsCategories.map((category) => (
               <CategoryCard key={category.title} to="/catalogo">
-                <CategoryTop>
-                  <CategoryIndex>{String(index + 1).padStart(2, '0')}</CategoryIndex>
-                  <CategoryHint>Explorar</CategoryHint>
-                </CategoryTop>
                 <CategoryMedia>
                   <CategoryImage src={category.image} alt={category.title} />
                 </CategoryMedia>
@@ -211,15 +233,35 @@ export function SportsCategoriesSection() {
                   <CategoryTitle>{category.title}</CategoryTitle>
                   <CategoryDescription>{category.description}</CategoryDescription>
                 </CategoryBody>
-                <CategoryFooter>
-                  <CategoryLinkText>Ver selecao</CategoryLinkText>
-                  <Arrow>+</Arrow>
-                </CategoryFooter>
+
               </CategoryCard>
             ))}
           </Grid>
+          <EditorialBand>
+            <EditorialLead>
+              <EditorialLeadImage src={sportsEditorialFeature.leadImage} alt={sportsEditorialFeature.title} />
+            </EditorialLead>
+            <EditorialSide>
+              <Eyebrow>{sportsEditorialFeature.eyebrow}</Eyebrow>
+              <EditorialPortraitWrap>
+                <EditorialPortrait src={sportsEditorialFeature.portraitImage} alt={sportsEditorialFeature.title} />
+              </EditorialPortraitWrap>
+              <EditorialCopy>
+                <EditorialTitle>{sportsEditorialFeature.title}</EditorialTitle>
+                <EditorialText>{sportsEditorialFeature.description}</EditorialText>
+                <EditorialNote>{sportsEditorialFeature.note}</EditorialNote>
+              </EditorialCopy>
+            </EditorialSide>
+          </EditorialBand>
         </SectionInner>
       </SectionFrame>
     </Section>
   );
 }
+
+
+
+
+
+
+

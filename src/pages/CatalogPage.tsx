@@ -5,9 +5,13 @@ import {
   catalogEditorialNotes,
   catalogEditorialVisual,
   catalogHighlights,
-  catalogQuickFilters
+  catalogQuickFilters,
 } from '../features/catalog/data/editorialContent';
 import { products } from '../features/catalog/data/products';
+import { useCatalogFilters } from '../features/catalog/hooks/useCatalogFilters';
+import { useFilteredProducts } from '../features/catalog/hooks/useFilteredProducts';
+import type { ProductCategory, SortOption } from '../features/catalog/types';
+import { formatCategoryLabel } from '../features/catalog/utils/formatCategoryLabel';
 
 const Page = styled(Container)`
   display: grid;
@@ -37,6 +41,11 @@ const Intro = styled.div`
   gap: ${({ theme }) => theme.spacing[4]};
 `;
 
+const IntroHeader = styled.div`
+  display: grid;
+  gap: ${({ theme }) => theme.spacing[4]};
+`;
+
 const Eyebrow = styled.span`
   color: ${({ theme }) => theme.colors.primary};
   font-family: ${({ theme }) => theme.fonts.body};
@@ -55,6 +64,11 @@ const Text = styled.p`
   color: ${({ theme }) => theme.colors.textMuted};
   font-family: ${({ theme }) => theme.fonts.body};
   line-height: 1.8;
+`;
+
+const Controls = styled.div`
+  display: grid;
+  gap: ${({ theme }) => theme.spacing[4]};
 `;
 
 const FilterRow = styled.div`
@@ -76,6 +90,44 @@ const FilterChip = styled.button<{ $active?: boolean }>`
   font-family: ${({ theme }) => theme.fonts.body};
   font-size: 0.9rem;
   font-weight: 500;
+  cursor: pointer;
+`;
+
+const InputRow = styled.div`
+  display: grid;
+  gap: ${({ theme }) => theme.spacing[3]};
+
+  @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
+    grid-template-columns: minmax(0, 1fr) 14rem auto;
+  }
+`;
+
+const SearchInput = styled.input`
+  min-height: 3rem;
+  padding: 0 ${({ theme }) => theme.spacing[4]};
+  border: 1px solid ${({ theme }) => theme.colors.border};
+  border-radius: ${({ theme }) => theme.radii.pill};
+  background: ${({ theme }) => theme.colors.surface};
+  font: inherit;
+`;
+
+const Select = styled.select`
+  min-height: 3rem;
+  padding: 0 ${({ theme }) => theme.spacing[4]};
+  border: 1px solid ${({ theme }) => theme.colors.border};
+  border-radius: ${({ theme }) => theme.radii.pill};
+  background: ${({ theme }) => theme.colors.surface};
+  font: inherit;
+`;
+
+const ClearButton = styled.button`
+  min-height: 3rem;
+  padding: 0 ${({ theme }) => theme.spacing[4]};
+  border: 1px solid ${({ theme }) => theme.colors.borderStrong};
+  border-radius: ${({ theme }) => theme.radii.pill};
+  background: transparent;
+  font: inherit;
+  cursor: pointer;
 `;
 
 const HeroAside = styled.aside`
@@ -85,7 +137,8 @@ const HeroAside = styled.aside`
 
 const HighlightCard = styled.div<{ $tone: 'primary' | 'secondary' | 'support' }>`
   display: grid;
-  gap: ${({ theme }) => theme.spacing[2]};
+  gap: ${({ theme }) => theme.spacing[3]};
+  align-content: center;
   padding: ${({ theme }) => theme.spacing[4]};
   border: 1px solid ${({ theme }) => theme.colors.border};
   border-radius: ${({ theme }) => theme.radii.xl};
@@ -97,9 +150,12 @@ const HighlightCard = styled.div<{ $tone: 'primary' | 'secondary' | 'support' }>
 `;
 
 const HighlightValue = styled.strong`
+  display: block;
+  max-width: 100%;
   font-family: ${({ theme }) => theme.fonts.display};
-  font-size: 2rem;
-  line-height: 0.9;
+  font-size: clamp(1.6rem, 2.4vw, 2rem);
+  line-height: 1;
+  overflow-wrap: anywhere;
 `;
 
 const HighlightLabel = styled.span`
@@ -223,25 +279,69 @@ const NoteDescription = styled.span`
   line-height: 1.65;
 `;
 
+const categoryOptions = ['Todos', ...catalogQuickFilters] as const;
+const sortOptions: Array<{ value: SortOption; label: string }> = [
+  { value: 'featured', label: 'Destaques' },
+  { value: 'price-asc', label: 'Menor preço' },
+  { value: 'price-desc', label: 'Maior preço' },
+  { value: 'name-asc', label: 'Nome' },
+];
+
 export function CatalogPage() {
+  const { filters, setCategory, setSearch, setSort, resetFilters } = useCatalogFilters();
+  const filteredProducts = useFilteredProducts(products, filters);
+
   return (
     <Page>
       <Hero>
         <Intro>
-          <Eyebrow>Catalogo Vortic</Eyebrow>
-          <Title>Selecao esportiva com leitura editorial.</Title>
+          <IntroHeader>
+          <Eyebrow>Catálogo Vortic</Eyebrow>
+          <Title>Escolha por modalidade, refine por uso e encontre o que falta na semana.</Title>
+          </IntroHeader>
           <Text>
-            O catalogo organiza produto como curadoria viva. A pagina nasce clara,
-            silenciosa e pronta para crescer em filtros, recomendacoes e integracao
-            com backend sem perder o ritmo visual da marca.
+            O catálogo reúne corrida, ciclismo, futebol, natação e tênis como
+            entradas principais. Treino, basquete e acessórios aparecem como
+            complemento natural para quem precisa fechar a bolsa, a quadra, a
+            piscina ou o deslocamento do dia.
           </Text>
-          <FilterRow aria-label="Filtros visuais de categoria">
-            {catalogQuickFilters.map((filter, index) => (
-              <FilterChip key={filter} type="button" $active={index === 0}>
-                {filter}
-              </FilterChip>
-            ))}
-          </FilterRow>
+          <Controls>
+            <FilterRow aria-label="Filtros visuais de categoria">
+              {categoryOptions.map((filter) => {
+                const categoryValue = filter === 'Todos' ? '' : (filter as ProductCategory);
+                const isActive = (filters.category || '') === categoryValue;
+
+                return (
+                  <FilterChip
+                    key={filter}
+                    type="button"
+                    $active={isActive}
+                    onClick={() => setCategory(categoryValue)}
+                  >
+                    {filter === 'Todos' ? filter : formatCategoryLabel(filter)}
+                  </FilterChip>
+                );
+              })}
+            </FilterRow>
+            <InputRow>
+              <SearchInput
+                type="search"
+                placeholder="Buscar por tênis, mochila, bola, faixa ou tipo de treino"
+                value={filters.search}
+                onChange={(event) => setSearch(event.target.value)}
+              />
+              <Select value={filters.sort} onChange={(event) => setSort(event.target.value as SortOption)}>
+                {sortOptions.map((option) => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
+              </Select>
+              <ClearButton type="button" onClick={resetFilters}>
+                Limpar filtros
+              </ClearButton>
+            </InputRow>
+          </Controls>
         </Intro>
         <HeroAside>
           {catalogHighlights.map((highlight) => (
@@ -256,19 +356,20 @@ export function CatalogPage() {
       <Content>
         <Shelf>
           <ShelfHeader>
-            <Eyebrow>Selecao ativa</Eyebrow>
-            <ShelfTitle>Produtos com contexto, ritmo e espaco para descoberta.</ShelfTitle>
+            <Eyebrow>Seleção ativa</Eyebrow>
+            <ShelfTitle>Produtos para começar, retomar ou completar a rotina esportiva.</ShelfTitle>
             <ShelfText>
-              A grade principal evita a sensacao de prateleira ruidosa. O foco esta em
-              leitura rapida, categoria clara e continuidade entre compra, uso e repertorio.
+              Filtre pela modalidade, busque por tipo de item e compare preço,
+              faixa e proposta de uso ainda na vitrine. Os 08 itens ativos foram
+              organizados para leitura rápida e decisão mais segura.
             </ShelfText>
             <ShelfMeta>
-              <MetaItem>{products.length} itens na selecao inicial</MetaItem>
-              <MetaItem>Marketplace + editorial</MetaItem>
-              <MetaItem>Pronto para filtros reais</MetaItem>
+              <MetaItem>{filteredProducts.length} itens na listagem atual</MetaItem>
+              <MetaItem>Entrega para todo o Brasil</MetaItem>
+              <MetaItem>Troca em até 30 dias</MetaItem>
             </ShelfMeta>
           </ShelfHeader>
-          <ProductGrid products={products} />
+          <ProductGrid products={filteredProducts} />
         </Shelf>
 
         <EditorialPanel>

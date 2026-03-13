@@ -1,168 +1,241 @@
-import lifestyleRunImage from '../../../assets/images/products/FotoPessoaCorrendoVisaoPernas.avif';
-import bandanaImage from '../../../assets/images/products/bandanatenis.avif';
-import capImage from '../../../assets/images/products/bone.avif';
-import backpackImage from '../../../assets/images/products/mochila.avif';
-import swimSetImage from '../../../assets/images/products/natacao.avif';
-import cyclingSupportImage from '../../../assets/images/products/shortCiclismoFemDois.avif';
+﻿import lifestyleRunImage from '../../../assets/images/products/FotoPessoaCorrendoVisaoPernas.avif';
+import camisaChileImage from '../../../assets/images/products/camisaFutebolChile.png';
+import femaleTransitImage from '../../../assets/images/products/malaFem.png';
+import swimSupportImage from '../../../assets/images/products/natacaosunga.png';
+import pouchImage from '../../../assets/images/products/pochete.png';
+import shortTenisImage from '../../../assets/images/products/shortTenisMasc.png';
+import cyclingSupportImage from '../../../assets/images/products/shortCiclismoFemDois.png';
+import womanTrainingLifestyleImage from '../../../assets/images/products/mulherFazendoExercicio..avif';
+import manPortraitImage from '../../../assets/images/products/homemFazendoPosePretoeBranco.avif';
 
 export const catalogQuickFilters = [
   'Tudo',
   'Corrida',
-  'Academia',
+  'Treino',
   'Futebol',
   'Natacao',
   'Ciclismo',
-  'Basquete'
+  'Basquete',
+  'Tenis',
+  'Acessorios',
 ] as const;
 
 export const catalogHighlights = [
   {
+    value: '08',
+    label: 'itens ativos com leitura clara de preço, faixa e proposta de uso',
+    tone: 'primary' as const,
+  },
+  {
+    value: '05',
+    label: 'modalidades principais para abrir a busca com menos ruído',
+    tone: 'secondary' as const,
+  },
+  {
     value: '06',
-    label: 'produtos ativos na selecao inicial',
-    tone: 'primary' as const
+    label: 'destaques na home para chegar mais rápido ao que interessa',
+    tone: 'support' as const,
   },
-  {
-    value: '03',
-    label: 'frentes combinadas entre comercio, repertorio e uso real',
-    tone: 'secondary' as const
-  },
-  {
-    value: '01',
-    label: 'linguagem visual unica para toda a experiencia',
-    tone: 'support' as const
-  }
 ] as const;
 
 export const catalogEditorialNotes = [
   {
-    title: 'Curadoria enxuta',
-    description: 'A vitrine privilegia poucos produtos com leitura rapida e contexto claro.'
+    title: 'Comece pela modalidade',
+    description: 'Se a dúvida ainda estiver aberta, comece por corrida, ciclismo, futebol, natação ou tênis para cortar o excesso logo no início.',
   },
   {
-    title: 'Base para evolucao',
-    description: 'Filtros, ordenacao e recomendacoes podem entrar depois sem reescrever a pagina.'
+    title: 'Busque pelo tipo de item',
+    description: 'Mochila, bola, faixa, kit, jaqueta ou tênis funcionam melhor do que termos amplos demais.',
   },
   {
-    title: 'Marca antes de ruido',
-    description: 'A pagina funciona como selecao assinada, nao como parede promocional.'
-  }
+    title: 'Compare antes de levar',
+    description: 'Badge, faixa de tamanho e descrição curta já ajudam a separar o que entra agora do que pode esperar.',
+  },
 ] as const;
 
 export const catalogEditorialVisual = {
-  image: backpackImage,
-  overline: 'Vitrine editorial',
-  title: 'Uma selecao pensada para acompanhar habito, deslocamento e treino.',
+  image: femaleTransitImage,
+  overline: 'Como navegar',
+  title: 'Do tênis de base à mochila de uso diário, o catálogo encurta a procura sem tirar contexto.',
   description:
-    'O catalogo ja nasce com espaco para conteudo, contexto e descoberta. Produtos entram como suporte da pratica esportiva e nao como excesso de oferta.'
+    'Quando o esporte já está definido, a modalidade resolve metade do caminho. Quando o item vem primeiro, vale buscar por mochila, bola, faixa, kit, jaqueta ou tipo de treino.',
 } as const;
 
 export const productEditorialBySlug = {
-  'tenis-adizero-evo-sl': {
-    overline: 'Edicao corrida',
+  'tenis-pulse-atr': {
+    overline: 'Tênis para corrida diária',
     description:
-      'Um tenis pensado para treinos de resposta rapida, deslocamento urbano e rotinas em que leveza e presenca caminham juntas.',
+      'Um modelo de base para quem corre entre 5 e 10 km, alterna rua e esteira e prefere amortecimento estável em vez de sensação excessivamente macia.',
     supportImage: lifestyleRunImage,
-    supportLabel: 'Ritmo e cidade',
-    supportText: 'Funciona bem para quem alterna treino tecnico, recuperacao ativa e uso cotidiano.',
-    highlights: ['Resposta leve', 'Leitura limpa', 'Uso versatil'],
+    supportLabel: 'Onde entra melhor',
+    supportText: 'Funciona como par principal para treinos comuns, aquecimento e rodagem leve, principalmente quando a corrida abre ou fecha o dia.',
+    highlights: [
+      'Amortecimento estável para treino diário',
+      'Cabedal ventilado que seca rápido',
+      'Boa leitura para rua e esteira',
+    ],
     specs: [
-      { label: 'Indicacao', value: 'Treinos curtos e ritmo progressivo' },
-      { label: 'Sensacao', value: 'Leveza com estrutura enxuta' },
-      { label: 'Curadoria', value: 'Corrida, commute e rotina ativa' }
+      { label: 'Indicação', value: 'Treinos de base, esteira e rodagem leve' },
+      { label: 'Tamanhos', value: '36 ao 43' },
+      { label: 'Construção', value: 'Drop de 8 mm com cabedal em mesh' },
     ],
     notes: [
-      'Bom ponto de entrada para quem quer elevar a rotina sem ir para um visual exagerado.',
-      'Entrega a mistura mais clara entre performance e linguagem premium dentro da selecao.'
-    ]
+      'É uma escolha boa para quem quer um par confiável para os treinos que mais se repetem, sem guardar o melhor tênis só para o longo.',
+      'Também funciona para quem mistura corrida curta, caminhada acelerada e deslocamento a pé no mesmo dia.',
+    ],
   },
-  'conjunto-academia-feminino': {
-    overline: 'Edicao training',
+  'conjunto-flow-training': {
+    overline: 'Top + legging de treino',
     description:
-      'Conjunto tecnico com leitura limpa para quem quer uma base consistente de treino e mobilidade ao longo da semana.',
-    supportImage: bandanaImage,
-    supportLabel: 'Camada base',
-    supportText: 'Ideal para treinos recorrentes, com foco em conforto, praticidade e visual organizado.',
-    highlights: ['Treino recorrente', 'Mobilidade', 'Base essencial'],
+      'Conjunto pensado para musculação, funcional e aula de studio, com top de suporte médio e legging de cós firme para treinos que pedem repetição na semana.',
+    supportImage: womanTrainingLifestyleImage,
+    supportLabel: 'Onde encaixa',
+    supportText: 'Resolve o treino recorrente de quem lava rápido, repete a peça e precisa de sustentação confortável sem excesso de compressão.',
+    highlights: [
+      'Top de suporte médio para força e studio',
+      'Tecido de secagem rápida para repetir na semana',
+      'Cós firme para agachamento e mobilidade',
+    ],
     specs: [
-      { label: 'Indicacao', value: 'Academia e rotina funcional' },
-      { label: 'Sensacao', value: 'Ajuste seguro e visual limpo' },
-      { label: 'Curadoria', value: 'Entrada para montar look tecnico' }
+      { label: 'Indicação', value: 'Musculação, funcional e studio' },
+      { label: 'Modelagem', value: 'Top ajustado e legging de cintura alta' },
+      { label: 'Tamanhos', value: 'PP ao GG' },
     ],
     notes: [
-      'Peca de base para construir uma rotina sem excesso de informacao visual.',
-      'Funciona bem para combinar com acessorios e camadas leves fora do treino.'
-    ]
+      'É uma base forte para quem prefere tirar a dúvida do look de treino e repetir a peça com segurança ao longo da semana.',
+      'O conjunto entra bem quando a prioridade é mobilidade com sustentação, não visual de academia montado demais.',
+    ],
   },
-  'bola-futebol-copa': {
-    overline: 'Edicao futebol',
+  'bola-match-5-club': {
+    overline: 'Bola para jogo e resenha',
     description:
-      'Item iconico para treinos, jogo casual e repertorio esportivo com apelo cultural imediato.',
-    supportImage: capImage,
-    supportLabel: 'Cultura de jogo',
-    supportText: 'A selecao de futebol entra como gesto de identidade, memoria e pratica ao mesmo tempo.',
-    highlights: ['Icone esportivo', 'Treino casual', 'Leitura cultural'],
+      'Bola número 5 pensada para society, gramado e partida recreativa, com toque firme e construção pronta para rodar mais de um jogo na semana.',
+    supportImage: camisaChileImage,
+    supportLabel: 'Quando vale levar',
+    supportText: 'É a compra que resolve rápido o jogo do fim de tarde, o treino leve e a bola que sempre falta quando o grupo combina de jogar.',
+    highlights: [
+      'Número 5 com toque firme e estável',
+      'Construção reforçada para society e campo',
+      'Boa para treino leve e jogo casual',
+    ],
     specs: [
-      { label: 'Indicacao', value: 'Jogo recreativo e treino leve' },
-      { label: 'Sensacao', value: 'Presenca visual e uso imediato' },
-      { label: 'Curadoria', value: 'Campo, quadra e repertorio urbano' }
+      { label: 'Indicação', value: 'Society, gramado e recreação' },
+      { label: 'Superfície', value: 'Uso misto em campo e society' },
+      { label: 'Perfil', value: 'Treino leve e jogo de fim de semana' },
     ],
     notes: [
-      'Produto com forte leitura emocional dentro da vitrine.',
-      'Ajuda a costurar esporte e lifestyle sem parecer merchandising.'
-    ]
+      'É uma compra simples, mas muito clara: quando a bola certa aparece, o jogo deixa de depender do improviso de alguém do grupo.',
+      'Faz sentido para quem quer uma opção única para alternar society e gramado sem complicar a escolha.',
+    ],
   },
-  'jaqueta-basket-performance': {
-    overline: 'Edicao basquete',
+  'jaqueta-courtline-woven': {
+    overline: 'Jaqueta leve para quadra',
     description:
-      'Jaqueta para quem busca camada funcional, volume certo e linguagem esportiva com mais personalidade.',
-    supportImage: backpackImage,
-    supportLabel: 'Camada externa',
-    supportText: 'Boa para deslocamento, aquecimento e rotina de quadra com identidade mais marcada.',
-    highlights: ['Protecao leve', 'Volume controlado', 'Uso urbano'],
+      'Camada leve para aquecimento, ida à quadra e saída do jogo, com modelagem solta para vestir por cima da regata sem travar o braço.',
+    supportImage: manPortraitImage,
+    supportLabel: 'Quando ela rende',
+    supportText: 'Entra antes do primeiro arremesso, segura o vento na ida e continua funcionando quando o basquete vira rua depois do jogo.',
+    highlights: [
+      'Camada leve para aquecimento e pós-jogo',
+      'Modelagem solta com mobilidade no braço',
+      'Visual limpo para quadra e rua',
+    ],
     specs: [
-      { label: 'Indicacao', value: 'Pre e pos treino, deslocamento' },
-      { label: 'Sensacao', value: 'Camada leve com presenca' },
-      { label: 'Curadoria', value: 'Basquete, rua e sobreposicao' }
+      { label: 'Indicação', value: 'Aquecimento, saída da quadra e deslocamento' },
+      { label: 'Modelagem', value: 'Solta, para sobreposição leve' },
+      { label: 'Tamanhos', value: 'P ao GG' },
     ],
     notes: [
-      'Peca que aproxima a pagina de produto de uma linguagem mais fashion-esportiva.',
-      'Funciona como item de repertorio e nao apenas cobertura tecnica.'
-    ]
+      'Resolve a camada externa de quem sai da quadra e continua o dia sem trocar o visual inteiro.',
+      'Também funciona para quem quer uma peça de rua com referência esportiva, mas sem cara de uniforme.',
+    ],
   },
-  'kit-natacao-training': {
-    overline: 'Edicao natacao',
+  'kit-pool-start': {
+    overline: 'Kit essencial de piscina',
     description:
-      'Kit de entrada para uma rotina consistente de piscina, com leitura simples e foco total em uso real.',
-    supportImage: swimSetImage,
-    supportLabel: 'Rotina de piscina',
-    supportText: 'Ajuda a criar constancia com um conjunto direto, funcional e facil de manter.',
-    highlights: ['Pratica constante', 'Entrada funcional', 'Baixo ruido'],
+      'Óculos, touca e case pensados para aula, nado livre e retorno à piscina, sem exagero de acessório para quem ainda está retomando a frequência.',
+    supportImage: swimSupportImage,
+    supportLabel: 'Primeira compra',
+    supportText: 'Resolve o básico para voltar a nadar com conforto e guardar tudo junto, sem gastar cedo demais com item que ainda não entra na rotina.',
+    highlights: [
+      'Óculos com vedação macia',
+      'Touca leve para rotina de piscina',
+      'Case rígido para guardar e levar',
+    ],
     specs: [
-      { label: 'Indicacao', value: 'Inicio e recorrencia de treino' },
-      { label: 'Sensacao', value: 'Uso direto e organizacao simples' },
-      { label: 'Curadoria', value: 'Piscina, mobilidade e frequencia' }
+      { label: 'Indicação', value: 'Aula, nado livre e retomada' },
+      { label: 'Conteúdo', value: 'Óculos, touca e case' },
+      { label: 'Perfil', value: 'Adulto' },
     ],
     notes: [
-      'Aposta em clareza e recorrencia em vez de excesso de equipamento.',
-      'Bom exemplo de como a Vortic pode curar entrada de categoria.'
-    ]
+      'É a compra certa para quem quer voltar à piscina sem transformar a retomada em uma lista longa demais.',
+      'Quando o básico já sai resolvido, fica mais fácil manter a frequência antes de ampliar o kit.',
+    ],
   },
-  'short-ciclismo-feminino': {
-    overline: 'Edicao ciclismo',
+  'short-pace-ride-2': {
+    overline: 'Bermuda para pedal diário',
     description:
-      'Short pensado para trajetos recorrentes, treino tecnico e construcoes de look mais enxutas no universo do pedal.',
+      'Bermuda de compressão média com forro anatômico para pedal urbano, giro curto e média distância, pensada para quem alterna deslocamento e treino.',
     supportImage: cyclingSupportImage,
-    supportLabel: 'Ritmo continuo',
-    supportText: 'Uma peca que reforca o lado tecnico do ciclismo com linguagem visual mais controlada.',
-    highlights: ['Ajuste tecnico', 'Ritmo constante', 'Perfil clean'],
+    supportLabel: 'Quando entra',
+    supportText: 'Resolve bem a ida ao trabalho de bike, o giro curto no meio da semana e o pedal mais longo de sábado sem pedir troca no meio do caminho.',
+    highlights: [
+      'Forro anatômico para mais tempo no selim',
+      'Compressão média com ajuste seguro',
+      'Boa para urbano e média distância',
+    ],
     specs: [
-      { label: 'Indicacao', value: 'Pedal urbano e treino de media distancia' },
-      { label: 'Sensacao', value: 'Compressao equilibrada e mobilidade' },
-      { label: 'Curadoria', value: 'Ciclismo, commute e endurance leve' }
+      { label: 'Indicação', value: 'Deslocamento, giro curto e média distância' },
+      { label: 'Modelagem', value: 'Rente ao corpo com compressão média' },
+      { label: 'Tamanhos', value: 'PP ao G' },
     ],
     notes: [
-      'Traz o lado mais tecnico da selecao sem sacrificar a leitura editorial.',
-      'Ajuda a diferenciar a vitrine de ciclismo de uma pagina puramente utilitaria.'
-    ]
-  }
+      'Entrega exatamente o que pesa na escolha do ciclista casual: conforto no selim, ajuste firme e uso repetido sem complicação.',
+      'Funciona para quem pedala por treino e para quem usa a bike como parte do deslocamento diário.',
+    ],
+  },
+  'faixa-court-dry': {
+    overline: 'Faixa leve para quadra',
+    description:
+      'Faixa elástica de secagem rápida para aula, treino técnico e jogo em dias de calor, segurando o suor sem pesar na bolsa.',
+    supportImage: shortTenisImage,
+    supportLabel: 'Detalhe que resolve',
+    supportText: 'É o tipo de acessório pequeno que melhora conforto imediato, libera a visão e evita parar o ponto para enxugar o rosto.',
+    highlights: [
+      'Secagem rápida para calor de quadra',
+      'Elástico macio sem apertar demais',
+      'Cabe na bolsa e resolve rápido',
+    ],
+    specs: [
+      { label: 'Indicação', value: 'Aula, treino técnico e jogo' },
+      { label: 'Ajuste', value: 'Elástico confortável' },
+      { label: 'Cor', value: 'Off-white com detalhe escuro' },
+    ],
+    notes: [
+      'Mostra como um acessório pequeno consegue melhorar conforto imediato sem aumentar o volume da bolsa.',
+      'Também entra bem em corrida leve e treino funcional quando o calor pede um detalhe simples para segurar o suor.',
+    ],
+  },
+  'mochila-transit-22l': {
+    overline: 'Mochila para treino e trabalho',
+    description:
+      'Mochila de 22 litros com divisão interna clara para levar notebook, troca de roupa e acessórios no mesmo dia, sem volume exagerado.',
+    supportImage: pouchImage,
+    supportLabel: 'O que ela resolve',
+    supportText: 'Funciona para quem sai cedo, passa pelo trabalho, encaixa treino no meio ou no fim do dia e precisa separar roupa usada do resto.',
+    highlights: [
+      '22 litros com leitura fácil de espaço',
+      'Bolso ventilado para o pós-treino',
+      'Boa para notebook, troca e acessórios',
+    ],
+    specs: [
+      { label: 'Indicação', value: 'Trabalho, treino e deslocamento' },
+      { label: 'Volume', value: '22 litros' },
+      { label: 'Compartimentos', value: 'Principal, frontal, lateral e bolso ventilado' },
+    ],
+    notes: [
+      'É uma escolha forte para quem sai cedo, passa o dia fora e precisa levar o treino junto sem carregar uma bolsa grande demais.',
+      'A divisão interna ajuda a separar roupa, acessório e item pessoal sem perder tempo procurando no fundo da mochila.',
+    ],
+  },
 } as const;

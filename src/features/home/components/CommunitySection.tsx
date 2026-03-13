@@ -1,4 +1,5 @@
-import styled from 'styled-components';
+﻿import styled from 'styled-components';
+import { HOME_SECTION_IDS } from '../../../app/routes/sections';
 import { communityCards, heroVisuals } from '../data/homeContent';
 import {
   Eyebrow,
@@ -6,7 +7,7 @@ import {
   SectionDescription,
   SectionHeader,
   SectionInner,
-  SectionTitle
+  SectionTitle,
 } from './HomeSection';
 
 const SectionFrame = styled.div`
@@ -158,24 +159,27 @@ const DetailText = styled.p`
 
 export function CommunitySection() {
   return (
-    <Section id="comunidade">
+    <Section id={HOME_SECTION_IDS.community}>
       <SectionFrame>
         <SectionInner>
           <SectionHeader>
-            <Eyebrow>Comunidade e estilo de vida</Eyebrow>
-            <SectionTitle>O esporte aparece como cultura de rotina, nao so performance.</SectionTitle>
+            <Eyebrow>Comunidade</Eyebrow>
+            <SectionTitle>Esporte entra na agenda real entre casa, trabalho e encontro.</SectionTitle>
             <SectionDescription>
-              Esse bloco abre espaco para historias, imagem real e sinais de pertencimento. A marca deixa de parecer vitrine fria e passa a comunicar um modo de viver.
+              A Vortic fala com quem encaixa treino entre trabalho, deslocamento,
+              quadra à noite e vontade de continuar em movimento.
             </SectionDescription>
           </SectionHeader>
           <Layout>
             <MainStory>
-              <MainImage src={heroVisuals.lifestyle} alt="Comunidade esportiva em movimento" />
+              <MainImage src={heroVisuals.communityLead} alt="Comunidade esportiva em movimento" />
               <StoryOverlay>
-                <StoryMeta>Vida esportiva contemporanea</StoryMeta>
-                <strong>Treinar, circular e compartilhar a cidade com outra energia.</strong>
+                <StoryMeta>Cidade em movimento</StoryMeta>
+                <strong>O esporte encontra espaço quando o dia não vira obstáculo.</strong>
                 <StoryText>
-                  A Vortic pode evoluir este espaco para historias, embaixadores, eventos ou series editoriais conectadas a cada modalidade.
+                  Corrida cedo, pedal para cruzar a cidade, quadra à noite e a
+                  mochila pronta para amanhã. A seleção certa e um guia curto
+                  ajudam a trocar de ritmo sem interromper a rotina.
                 </StoryText>
               </StoryOverlay>
             </MainStory>
@@ -195,9 +199,9 @@ export function CommunitySection() {
               <DetailStrip>
                 <DetailImage src={heroVisuals.communityProduct} alt="Detalhe editorial de produto esportivo" />
                 <DetailBody>
-                  <DetailLabel>Estilo, funcao e continuidade</DetailLabel>
+                  <DetailLabel>Entre treino e rua</DetailLabel>
                   <DetailText>
-                    Produtos e conteudo caminham juntos para sustentar a pratica como habito.
+                    Bolsa enxuta, troca leve e roupa certa deixam o treino atravessar o restante do dia sem parecer um bloco separado.
                   </DetailText>
                 </DetailBody>
               </DetailStrip>
@@ -208,3 +212,5 @@ export function CommunitySection() {
     </Section>
   );
 }
+
+

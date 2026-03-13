@@ -1,4 +1,5 @@
-import styled from 'styled-components';
+﻿import styled from 'styled-components';
+import { HOME_SECTION_IDS } from '../../../app/routes/sections';
 import { guideCards } from '../data/homeContent';
 import {
   Eyebrow,
@@ -6,7 +7,7 @@ import {
   SectionDescription,
   SectionHeader,
   SectionInner,
-  SectionTitle
+  SectionTitle,
 } from './HomeSection';
 
 const SectionFrame = styled.div`
@@ -118,14 +119,15 @@ const GuideAction = styled.a`
 
 export function SportGuidesSection() {
   return (
-    <Section id="guias">
+    <Section id={HOME_SECTION_IDS.guides}>
       <SectionFrame>
         <SectionInner>
           <SectionHeader>
-            <Eyebrow>Conteudo por esporte</Eyebrow>
-            <SectionTitle>Guias que conectam descoberta, contexto e compra.</SectionTitle>
+            <Eyebrow>Guias Vortic</Eyebrow>
+            <SectionTitle>Guias curtos para escolher melhor e tirar dúvida rápido.</SectionTitle>
             <SectionDescription>
-              O editorial nao aparece como bloco separado do comercio. Ele ajuda a orientar escolha, aprofundar repertorio e sustentar recorrencia.
+              Os guias entram para esclarecer uso, ajuste e prioridade de compra.
+              São leituras rápidas para quem quer começar, retomar ou entender o que vale levar primeiro.
             </SectionDescription>
           </SectionHeader>
           <Grid>
@@ -141,7 +143,7 @@ export function SportGuidesSection() {
                   </MetaRow>
                   <GuideTitle>{guide.title}</GuideTitle>
                   <GuideDescription>{guide.description}</GuideDescription>
-                  <GuideAction href="/#produtos">Ver produtos relacionados</GuideAction>
+                  <GuideAction href="/catalogo">Ler guia e ver seleção</GuideAction>
                 </GuideBody>
               </GuideCard>
             ))}
@@ -151,3 +153,6 @@ export function SportGuidesSection() {
     </Section>
   );
 }
+
+
+

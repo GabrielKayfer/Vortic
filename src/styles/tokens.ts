@@ -50,11 +50,11 @@ export const tokens = {
   },
   radii: {
     sm: '0px',
-    md: '4px',
-    lg: '6px',
-    xl: '8px',
-    xxl: '10px',
-    pill: '8px'
+    md: '0px',
+    lg: '0px',
+    xl: '0px',
+    xxl: '0px',
+    pill: '0px'
   },
   shadows: {
     soft: '0 16px 28px rgba(18, 20, 23, 0.08)'
