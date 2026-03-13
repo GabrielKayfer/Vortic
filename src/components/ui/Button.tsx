@@ -5,14 +5,14 @@ export const Button = styled.button`
   align-items: center;
   justify-content: center;
   gap: ${({ theme }) => theme.spacing[2]};
-  min-height: 48px;
-  padding: 0 ${({ theme }) => theme.spacing[5]};
+  min-height: 44px;
+  padding: 0 ${({ theme }) => theme.spacing[4]};
   border: 1px solid ${({ theme }) => theme.colors.lineStrong};
-  border-radius: ${({ theme }) => theme.radii.lg};
+  border-radius: ${({ theme }) => theme.radii.sm};
   background: ${({ theme }) => theme.colors.primary};
   color: ${({ theme }) => theme.colors.surface};
   font-family: ${({ theme }) => theme.fonts.body};
-  font-size: 0.95rem;
+  font-size: 0.92rem;
   font-weight: 600;
   letter-spacing: 0.01em;
   cursor: pointer;

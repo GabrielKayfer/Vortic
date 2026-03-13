@@ -1,7 +1,10 @@
-import { Link } from 'react-router-dom';
+﻿import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { getHomeSectionPath } from '../../../app/routes/paths';
 import { Button } from '../../../components/ui/Button';
+import { getProductImageBackground } from '../../catalog/utils/getProductImageBackground';
 import { heroStats, heroVisuals } from '../data/homeContent';
+import { HOME_SECTION_IDS } from '../../../app/routes/sections';
 import { Eyebrow, Section } from './HomeSection';
 
 const HeroRoot = styled(Section)`
@@ -54,18 +57,33 @@ const HeadlineBlock = styled.div`
   border-left: 3px solid ${({ theme }) => theme.colors.alert};
 `;
 
+const HeroEyebrow = styled(Eyebrow)`
+  width: fit-content;
+  padding: 0.12rem 0.45rem;
+  background: ${({ theme }) => theme.colors.surface};
+
+  @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
+    margin-left: 7.35rem;
+  }
+`;
+
 const Title = styled.h1`
   max-width: 10ch;
   font-size: clamp(3rem, 6.8vw, 5.9rem);
-  line-height: 0.84;
+  line-height: 0.9;
+  letter-spacing: -0.035em;
 `;
 
 const Description = styled.p`
-  max-width: 38rem;
-  color: ${({ theme }) => theme.colors.textMuted};
+  max-width: 34rem;
+  color: ${({ theme }) => theme.colors.text};
   font-family: ${({ theme }) => theme.fonts.body};
   font-size: 1.03rem;
   line-height: 1.8;
+
+  @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
+    padding-left: 5.25rem;
+  }
 `;
 
 const Actions = styled.div`
@@ -78,10 +96,10 @@ const SecondaryLink = styled(Link)`
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 48px;
-  padding: 0 ${({ theme }) => theme.spacing[5]};
+  min-height: 44px;
+  padding: 0 ${({ theme }) => theme.spacing[4]};
   border: 1px solid ${({ theme }) => theme.colors.lineStrong};
-  border-radius: ${({ theme }) => theme.radii.lg};
+  border-radius: ${({ theme }) => theme.radii.sm};
   background: ${({ theme }) => theme.colors.surface};
   font-family: ${({ theme }) => theme.fonts.body};
   font-weight: 600;
@@ -178,7 +196,7 @@ const FloatingCard = styled.div`
 
   span {
     font-family: ${({ theme }) => theme.fonts.body};
-    font-size: 0.95rem;
+    font-size: 0.92rem;
   }
 `;
 
@@ -195,11 +213,11 @@ const ProductCard = styled.div`
   background: ${({ theme }) => theme.colors.surface};
 `;
 
-const ProductImage = styled.img`
+const ProductImage = styled.img<{ $tone: string }>`
   width: 100%;
   aspect-ratio: 1 / 1;
   object-fit: cover;
-  background: ${({ theme }) => theme.colors.backgroundAlt};
+  background: ${({ $tone }) => $tone};
 `;
 
 const ProductMeta = styled.span`
@@ -234,27 +252,29 @@ const AccentImage = styled.img`
   width: 100%;
   aspect-ratio: 0.92 / 1;
   object-fit: cover;
-  background: ${({ theme }) => theme.colors.backgroundAlt};
+  background: linear-gradient(180deg, rgba(240, 210, 31, 0.12) 0%, rgba(217, 222, 227, 0.2) 100%), #EEF2F5;
 `;
 
 export function HeroSection() {
   return (
-    <HeroRoot id="inicio">
+    <HeroRoot id={HOME_SECTION_IDS.home}>
       <HeroFrame>
         <HeroPanel>
           <Copy>
             <HeadlineBlock>
-              <Eyebrow>Marketplace + editorial + ecossistema</Eyebrow>
-              <Title>Esporte com curadoria, contexto e vida real.</Title>
+              <HeroEyebrow>CRIE SEU REPERTÓRIO</HeroEyebrow>
+              <Title>Da escolha certa ao ritmo do esporte.</Title>
             </HeadlineBlock>
             <Description>
-              A Vortic organiza produtos, repertorio e rotina esportiva em uma mesma experiencia. A home nasce para parecer marca viva: silenciosa, premium e pronta para crescer em dados, conteudo e comercio.
+              A Vortic organiza corrida, ciclismo, futebol, natação e tênis com entradas
+              claras de compra, função e contexto. Treino, quadra e acessórios entram
+              como complemento da rotina, cada um com papel bem definido.
             </Description>
             <Actions>
               <Link to="/catalogo">
-                <Button as="span">Explorar selecao</Button>
+                <Button as="span">Ver a seleção da semana</Button>
               </Link>
-              <SecondaryLink to="/#guias">Ler guias por esporte</SecondaryLink>
+              <SecondaryLink to={getHomeSectionPath(HOME_SECTION_IDS.guides)}>Ler guias de escolha</SecondaryLink>
             </Actions>
             <Stats>
               {heroStats.map((item) => (
@@ -269,23 +289,27 @@ export function HeroSection() {
             <TallVisual>
               <HeroImage src={heroVisuals.lifestyle} alt="Atleta em movimento" />
               <FloatingCard>
-                <strong>Treino, compra e repertorio no mesmo fluxo.</strong>
-                <span>Uma home pensada para descoberta e continuidade.</span>
+                <strong>Corrida cedo, treino no meio do dia, jogo no sábado.</strong>
+                <span>Seleção, leitura e reposição aparecem na hora certa para o ritmo não quebrar.</span>
               </FloatingCard>
             </TallVisual>
             <VisualColumn>
               <ProductCard>
-                <ProductImage src={heroVisuals.mainProduct} alt="Tenis em destaque" />
+                <ProductImage
+                  $tone={getProductImageBackground('Corrida', heroVisuals.mainProduct)}
+                  src={heroVisuals.mainProduct}
+                  alt="Tênis de corrida em destaque"
+                />
                 <div>
-                  <ProductMeta>Selecao da semana</ProductMeta>
-                  <ProductTitle>Tenis de resposta rapida para corrida e deslocamento.</ProductTitle>
+                  <ProductMeta>Escolha da semana</ProductMeta>
+                  <ProductTitle>Rodagem leve para base, esteira e os primeiros quilômetros do dia.</ProductTitle>
                 </div>
               </ProductCard>
               <AccentCard>
-                <AccentImage src={heroVisuals.supportProduct} alt="Look de treino" />
+                <AccentImage src={heroVisuals.supportProduct} alt="Imagem editorial de treino e deslocamento" />
                 <div>
-                  <ProductMeta>Looks que acompanham a rotina</ProductMeta>
-                  <ProductTitle>Basicos tecnicos com linguagem mais editorial.</ProductTitle>
+                  <ProductMeta>Entre treino e cidade</ProductMeta>
+                  <ProductTitle>Bolsa, troca seca e camada leve para quando o esporte entra no meio do dia.</ProductTitle>
                 </div>
               </AccentCard>
             </VisualColumn>
@@ -295,3 +319,9 @@ export function HeroSection() {
     </HeroRoot>
   );
 }
+
+
+
+
+
+

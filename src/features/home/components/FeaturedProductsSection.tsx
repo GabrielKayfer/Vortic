@@ -1,15 +1,16 @@
-import { Link } from 'react-router-dom';
+﻿import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { HOME_SECTION_IDS } from '../../../app/routes/sections';
 import { ProductGrid } from '../../catalog/components/ProductGrid';
 import { products } from '../../catalog/data/products';
+import { getProductImageBackground } from '../../catalog/utils/getProductImageBackground';
 import { heroVisuals } from '../data/homeContent';
 import {
   Eyebrow,
   Section,
   SectionDescription,
   SectionHeader,
-  SectionInner,
-  SectionTitle
+  SectionTitle,
 } from './HomeSection';
 
 const SectionFrame = styled.div`
@@ -51,7 +52,7 @@ const EditorialCard = styled.aside`
 const EditorialVisual = styled.div`
   overflow: hidden;
   border: 1px solid ${({ theme }) => theme.colors.lineStrong};
-  background: ${({ theme }) => theme.colors.surfaceAlt};
+  background: ${getProductImageBackground('Ciclismo')};
 `;
 
 const EditorialImage = styled.img`
@@ -106,42 +107,44 @@ export function FeaturedProductsSection() {
   const featuredProducts = products.filter((product) => product.featured);
 
   return (
-    <Section id="produtos">
+    <Section id={HOME_SECTION_IDS.products}>
       <SectionFrame>
         <SectionPanel>
           <SectionHeader>
             <Eyebrow>Produtos em destaque</Eyebrow>
-            <SectionTitle>Curadoria que parece selecao, nao excesso de loja.</SectionTitle>
+            <SectionTitle>Seis itens escolhidos pelo que resolvem na semana.</SectionTitle>
             <SectionDescription>
-              A vitrine principal abre a largura da pagina e assume mais folego visual. O objetivo aqui e parecer selecao comercial real, com continuidade e espaco para descoberta.
+              A seleção parte das cinco modalidades e abre espaço para treino,
+              quadra e deslocamento sem perder clareza de uso.
             </SectionDescription>
           </SectionHeader>
           <Layout>
             <ProductGrid products={featuredProducts} />
             <EditorialCard>
-              <Eyebrow>Edicao Vortic</Eyebrow>
+              <Eyebrow>Edição da semana</Eyebrow>
               <EditorialVisual>
-                <EditorialImage src={heroVisuals.accentProduct} alt="Curadoria de produto Vortic" />
+                <EditorialImage src={heroVisuals.accentProduct} alt="Seleção de produtos Vortic" />
               </EditorialVisual>
-              <EditorialTitle>Produtos para iniciar ou consolidar uma rotina de treino.</EditorialTitle>
+              <EditorialTitle>Seis escolhas para começar melhor e comprar com critério.</EditorialTitle>
               <EditorialText>
-                Misturamos performance, usabilidade e uma linguagem mais limpa para que cada item entre como parte de um ecossistema maior.
+                Da rodagem curta ao pós-jogo, a edição reúne peças que cobrem
+                treino, reposição e deslocamento, com leitura clara de uso.
               </EditorialText>
               <NoteList>
                 <NoteItem>
-                  <NoteTitle>Selecao compacta</NoteTitle>
-                  <NoteDescription>Poucos itens com leitura imediata e mais espaco para contexto.</NoteDescription>
+                  <NoteTitle>Comece pelo uso</NoteTitle>
+                  <NoteDescription>Veja primeiro onde o item rende melhor: treino diário, deslocamento, quadra ou piscina.</NoteDescription>
                 </NoteItem>
                 <NoteItem>
-                  <NoteTitle>Comercio com repertorio</NoteTitle>
-                  <NoteDescription>Os produtos aparecem como parte da cultura do esporte, nao como ruido promocional.</NoteDescription>
+                  <NoteTitle>Compare rápido</NoteTitle>
+                  <NoteDescription>Preço, faixa de tamanho e atributo principal aparecem antes do clique.</NoteDescription>
                 </NoteItem>
                 <NoteItem>
-                  <NoteTitle>Base pronta para dados reais</NoteTitle>
-                  <NoteDescription>O bloco pode receber recomendacao, personalizacao e estoque sem mudar de forma.</NoteDescription>
+                  <NoteTitle>Leve o que falta</NoteTitle>
+                  <NoteDescription>A edição prioriza o que realmente falta na mochila, não só o que chama atenção no card.</NoteDescription>
                 </NoteItem>
               </NoteList>
-              <EditorialLink to="/catalogo">Ver catalogo completo</EditorialLink>
+              <EditorialLink to="/catalogo">Ver seleção completa</EditorialLink>
             </EditorialCard>
           </Layout>
         </SectionPanel>
@@ -149,3 +152,5 @@ export function FeaturedProductsSection() {
     </Section>
   );
 }
+
+

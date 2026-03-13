@@ -1,61 +1,106 @@
-import adizeroImage from '../../../assets/images/products/Tenis_ADIZERO_EVO_SL_ATR_Preto_KK2685_HM1.avif';
-import academiaFemImage from '../../../assets/images/products/academiafem.avif';
-import bolaCopaImage from '../../../assets/images/products/bolaFutebolCopa.avif';
-import jaquetaBasketImage from '../../../assets/images/products/jaketaBasket.avif';
-import natacaoImage from '../../../assets/images/products/natacao.avif';
-import shortCiclismoImage from '../../../assets/images/products/shortCiclismoFem.avif';
+﻿import adizeroImage from '../../../assets/images/products/Tenis_ADIZERO_EVO_SL_ATR_Preto_KK2685_HM1.png';
+import academiaFemImage from '../../../assets/images/products/academiafem.png';
+import bandanaImage from '../../../assets/images/products/bandanatenis.png';
+import bolaCopaImage from '../../../assets/images/products/bolaFutebolCopa.png';
+import jaquetaBasketImage from '../../../assets/images/products/jaketaBasket1.png';
+import mochilaImage from '../../../assets/images/products/mochila.png';
+import natacaoImage from '../../../assets/images/products/natacao.png';
+import shortCiclismoImage from '../../../assets/images/products/shortCiclismoFem1.png';
 import type { Product } from '../types';
 
 export const products: Product[] = [
   {
     id: 'prod-1',
-    slug: 'tenis-adizero-evo-sl',
-    name: 'Tenis Adizero Evo SL ATR',
+    slug: 'tenis-pulse-atr',
+    name: 'Vortic Pulse ATR',
     category: 'Corrida',
-    price: 899.9,
+    price: 879.9,
     image: adizeroImage,
+    badge: 'Rodagem diária',
+    description: 'Tênis de base para rua e esteira, com passada estável em treinos de 5 a 10 km.',
+    attributes: ['36 ao 43', 'Amortecimento estável'],
     featured: true,
   },
   {
     id: 'prod-2',
-    slug: 'conjunto-academia-feminino',
-    name: 'Conjunto Academia Feminino',
-    category: 'Academia',
-    price: 239.9,
+    slug: 'conjunto-flow-training',
+    name: 'Conjunto Flow Studio',
+    category: 'Treino',
+    price: 279.9,
     image: academiaFemImage,
+    badge: 'Força e studio',
+    description: 'Top de suporte médio com legging de cós firme para musculação, funcional e studio.',
+    attributes: ['PP ao GG', 'Cós firme'],
     featured: true,
   },
   {
     id: 'prod-3',
-    slug: 'bola-futebol-copa',
-    name: 'Bola Futebol Copa',
+    slug: 'bola-match-5-club',
+    name: 'Bola Match Club Nº5',
     category: 'Futebol',
     price: 179.9,
     image: bolaCopaImage,
+    badge: 'Society e campo',
+    description: 'Bola de treino com toque firme para society, gramado e jogo de sábado.',
+    attributes: ['Tamanho 5', 'Uso em grama'],
     featured: true,
   },
   {
     id: 'prod-4',
-    slug: 'jaqueta-basket-performance',
-    name: 'Jaqueta Basket Performance',
+    slug: 'jaqueta-courtline-woven',
+    name: 'Jaqueta Courtline Warm-Up',
     category: 'Basquete',
     price: 329.9,
     image: jaquetaBasketImage,
+    badge: 'Aquecimento leve',
+    description: 'Camada corta-vento para ida à quadra, aquecimento e saída do jogo.',
+    attributes: ['P ao GG', 'Modelagem solta'],
+    featured: true,
   },
   {
     id: 'prod-5',
-    slug: 'kit-natacao-training',
-    name: 'Kit Natacao Training',
+    slug: 'kit-pool-start',
+    name: 'Kit Pool Start',
     category: 'Natacao',
     price: 149.9,
     image: natacaoImage,
+    badge: 'Retomada na piscina',
+    description: 'Óculos, touca e case para aula, nado livre e volta à água sem excesso.',
+    attributes: ['Adulto', 'Vedação macia'],
+    featured: true,
   },
   {
     id: 'prod-6',
-    slug: 'short-ciclismo-feminino',
-    name: 'Short Ciclismo Feminino',
+    slug: 'short-pace-ride-2',
+    name: 'Bermuda Pace Ride 2.0',
     category: 'Ciclismo',
-    price: 199.9,
+    price: 219.9,
     image: shortCiclismoImage,
+    badge: 'Pedal urbano',
+    description: 'Bermuda de compressão média para giro curto, deslocamento e pedal de sábado.',
+    attributes: ['PP ao G', 'Forro anatômico'],
+    featured: true,
+  },
+  {
+    id: 'prod-7',
+    slug: 'faixa-court-dry',
+    name: 'Faixa Court Dry',
+    category: 'Tenis',
+    price: 79.9,
+    image: bandanaImage,
+    badge: 'Quadra e calor',
+    description: 'Faixa elástica para segurar o suor em treino técnico, aula e jogo.',
+    attributes: ['Tamanho único', 'Toque macio'],
+  },
+  {
+    id: 'prod-8',
+    slug: 'mochila-transit-22l',
+    name: 'Mochila Transit 22L',
+    category: 'Acessorios',
+    price: 279.9,
+    image: mochilaImage,
+    badge: 'Treino e trabalho',
+    description: '22 litros com bolso ventilado para levar notebook, troca e acessórios no mesmo dia.',
+    attributes: ['22 litros', 'Divisão interna'],
   },
 ];
